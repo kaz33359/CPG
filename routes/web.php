@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\AdminController;
 
 
 /*
@@ -31,3 +32,9 @@ Route::get('/fire-protection-system', [PagesController::class, 'fire_protection_
 Route::get('/OTHM', [PagesController::class, 'OTHM'])->name('OTHM');
 Route::get('/safety-manpower-solution', [PagesController::class, 'safety_manpower_solution'])->name('safety-manpower-solution');
 Route::get('/STED', [PagesController::class, 'STED'])->name('STED');
+
+
+
+
+Route::get('/admin', [AdminController::class, 'admin'])->name('STED');
+
