@@ -36,5 +36,8 @@ Route::get('/STED', [PagesController::class, 'STED'])->name('STED');
 
 
 
-Route::get('/admin', [AdminController::class, 'admin'])->name('STED');
+Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
+Route::get('/admin/login', [AdminController::class, 'admin_login'])->name('admin_login');
+Route::get('/admin/students', [AdminController::class, 'students'])->name('students');
+Route::get('/admin/admin-profile', [AdminController::class, 'admin_profile'])->name('admin_profile');
 
