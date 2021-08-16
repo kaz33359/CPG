@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>CPG | Login</title>
+    <title>CPG |Admin Login</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('admin-assets/assets/img/cpglogo.jpg') }}" />
 
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
@@ -16,6 +16,8 @@
     <!-- END GLOBAL MANDATORY STYLES -->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/assets/css/forms/theme-checkbox-radio.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/assets/css/forms/switches.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/assets/css/elements/alert.css') }}">
+
 </head>
 
 <body class="form">
@@ -29,7 +31,8 @@
                         <h1 class="">Sign In</h1>
                         <p class="">Welcome Admin.</p>
 
-                        <form class="text-left" action="{{ route('admin') }}">
+                        <form class="text-left" method="POST" action="{{ route('admin.auth') }}">
+                            @csrf
                             <div class="form">
 
                                 <div id="username-field" class="field-wrapper input">
@@ -40,8 +43,8 @@
                                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                         <circle cx="12" cy="7" r="4"></circle>
                                     </svg>
-                                    <input id="username" name="username" type="text" class="form-control"
-                                        placeholder="Email">
+                                    <input id="email" name="email" type="text" class="form-control"
+                                        placeholder="Email" required>
                                 </div>
 
                                 <div id="password-field" class="field-wrapper input mb-2">
@@ -57,7 +60,7 @@
                                         <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                     </svg>
                                     <input id="password" name="password" type="password" class="form-control"
-                                        placeholder="Password">
+                                        placeholder="Password" required>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round" id="toggle-password" class="feather feather-eye">
@@ -65,11 +68,22 @@
                                         <circle cx="12" cy="12" r="3"></circle>
                                     </svg>
                                 </div>
+
+
                                 <div class="d-sm-flex justify-content-between">
                                     <div class="field-wrapper">
                                         <button type="submit" class="btn btn-primary" value="">Log In</button>
                                     </div>
                                 </div>
+                                 
+                                @if(session('error'))
+                                    <div class="alert alert-light-danger border-0 mt-4 mb-4" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-dismiss="alert"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button> <strong>Error!</strong> {{ session('error') }}</div>
+                                @endif
+
+                                @if(session('logout'))
+                                    <div class="alert alert-light-success border-0 mt-4 mb-4" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-dismiss="alert"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>{{ session('logout') }}</div>
+                                @endif
+                            
 
 
                                 <p class="signup-link">Forgot your Credentails ? <a href="">Contact Admin</a></p>

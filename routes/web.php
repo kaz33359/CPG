@@ -36,8 +36,22 @@ Route::get('/STED', [PagesController::class, 'STED'])->name('STED');
 
 
 
-Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
-Route::get('/admin/login', [AdminController::class, 'admin_login'])->name('admin_login');
-Route::get('/admin/students', [AdminController::class, 'students'])->name('students');
-Route::get('/admin/admin-profile', [AdminController::class, 'admin_profile'])->name('admin_profile');
+Route::get('admin', [AdminController::class, 'index']);
+Route::post('admin/auth', [AdminController::class, 'auth'])->name('admin.auth');
+
+Route::group(['middleware'=> 'admin_auth'],function(){
+    Route::get('admin/dashboard', [AdminController::class,'dashboard'])->name('dashboard');
+    
+    Route::get('admin/logout', function () {
+        session()->forget('ADMIN_LOGIN');
+        session()->forget('ADMIN_ID');
+        session()->flash('logout', 'Logout Successfully');
+        return redirect('admin');
+    });
+
+});
+
+// Route::get('/admin/login', [AdminController::class, 'admin_login'])->name('admin_login');
+// Route::get('/admin/students', [AdminController::class, 'students'])->name('students');
+// Route::get('/admin/admin-profile', [AdminController::class, 'admin_profile'])->name('admin_profile');
 

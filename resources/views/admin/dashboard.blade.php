@@ -8,7 +8,7 @@
     <title>CPG | Home</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('admin-assets/assets/img/cpglogo.jpg') }}" />
 
-    <link href="{{ asset('admin-assets/assets/css/loader.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset(' admin-assets/assets/css/loader.css') }}" rel="stylesheet" type="text/css" />
     <script src="{{ asset('admin-assets/assets/js/loader.js' )}}"></script>
 
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
@@ -49,7 +49,7 @@
                 </svg></a>
 
             <div class="nav-logo align-self-center">
-                <a class="navbar-brand" href="{{ route('admin') }}"><img alt="logo" src="{{ asset('admin-assets/assets/img/header-logo.png') }}"> </a>
+                <a class="navbar-brand" href=""><img alt="logo" src="{{ asset('admin-assets/assets/img/header-logo.png') }}"> </a>
             </div>
 
 
@@ -173,7 +173,7 @@
 
                     <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
                         <div class="dropdown-item">
-                            <a href="{{ route('admin_profile') }}">
+                            <a href="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="feather feather-user">
@@ -195,7 +195,7 @@
                             </a>
                         </div>
                         <div class="dropdown-item">
-                            <a href="{{ route('admin_login') }}">
+                            <a href="logout">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="feather feather-log-out">
@@ -223,19 +223,19 @@
             <nav id="topbar">
                 <ul class="navbar-nav theme-brand flex-row  text-center">
                     <li class="nav-item theme-logo">
-                        <a href="{{ route('admin') }}">
+                        <a href="">
                             <img src="{{ asset('admin-assets/assets/img/header-logo.png') }}" class="navbar-logo" alt="logo">
                         </a>
                     </li>
                     <li class="nav-item theme-text">
-                        <a href="{{ route('admin') }}" class="nav-link"> </a>
+                        <a href="" class="nav-link"> </a>
                     </li>
                 </ul>
 
                 <ul class="list-unstyled menu-categories" id="topAccordion">
 
                     <li class="menu single-menu active">
-                        <a href="{{ route('admin') }}" aria-expanded="true"
+                        <a href="{{ route('dashboard') }}" aria-expanded="true"
                             class="dropdown-toggle autodroprown">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -250,7 +250,7 @@
                     </li>
 
                     <li class="menu single-menu">
-                        <a href="{{ route('students') }}" aria-expanded="true"
+                        <a href="" aria-expanded="true"
                             class="dropdown-toggle autodroprown">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
