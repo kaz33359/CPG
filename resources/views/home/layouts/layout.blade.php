@@ -128,24 +128,46 @@
 					<div class="tab-content" id="myTabContent">
 						<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 							<div class="login_form">
-								<form action="#">
+								<form action="{{ route('student.auth') }}" method="POST">
+									@csrf
 									<div class="heading">
 										<h3 class="text-center">Login to your account</h3>
 									</div>
 									<div class="form-group">
-										<input type="email" class="form-control" id="exampleInputEmail1"
-											placeholder="Email Address">
+										<input type="email" name="email" class="form-control" id="exampleInputEmail1" 
+											placeholder="Email Address" required>
 									</div>
 									<div class="form-group">
-										<input type="password" class="form-control" id="exampleInputPassword1"
-											placeholder="Password">
+										<input type="password" name="password" class="form-control" id="exampleInputPassword1"
+											placeholder="Password" required>
 									</div>
-									<div class="form-group custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="exampleCheck1">
-										<label class="custom-control-label" for="exampleCheck1">Remember me</label>
-										<a class="tdu btn-fpswd float-right" href="#">Forgot Password?</a>
+									<div class="form-group form-check">
+										<input type="checkbox" class="form-check-input" id="exampleCheck1">
+										<label class="form-check-label" for="exampleCheck1">Remember me</label>
+										<a class="tdu text-thm float-right" href="#">Forgot Password?</a>
 									</div>
-									<button type="submit" class="btn btn-log btn-block btn-thm2">Login</button>
+											@if(session('error'))
+										<div class="ui_kit_message_box">
+											<div class="alert alert-primary alert-dismissible fade show" role="alert">
+													{{ session('error') }}
+												<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+										</div>
+										@endif
+										{{-- @if(session('logout'))
+										<div class="ui_kit_message_box">
+											<div class="alert alert-primary alert-dismissible fade show" role="alert">
+													{{ session('logout') }}
+												<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+										</div>
+										@endif --}}
+									<button type="submit" id="btnLogin" class="btn btn-log btn-block btn-thm2">Login</button>
+									<hr>
 								</form>
 							</div>
 						</div>

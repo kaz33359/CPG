@@ -34,13 +34,13 @@ class PagesController extends Controller
             'title' => $title
         ]);
     }
-    public function login()
-    {
-        $title = 'CPG | LOGIN';
-        return view('home/login',[
-            'title' => $title
-        ]);
-    }
+    // public function login()
+    // {
+    //     $title = 'CPG | LOGIN';
+    //     return view('home/login',[
+    //         'title' => $title
+    //     ]);
+    // }
 
     public function consultancyServices()
     {

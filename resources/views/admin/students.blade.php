@@ -16,11 +16,12 @@
     <link href="{{ asset('admin-assets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('admin-assets/assets/css/plugins.css') }}" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
+    
 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
     <link href="{{ asset('admin-assets/assets/css/components/tabs-accordian/custom-accordions.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/plugins/table/datatable/datatables.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/table/datatable/custom_dt_html5.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/plugins/table/datatable/custom_dt_html5.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/plugins/table/datatable/dt-global_style.css') }}">
 
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
@@ -52,7 +53,7 @@
                 </svg></a>
 
             <div class="nav-logo align-self-center">
-                <a class="navbar-brand" href="{{ route('admin') }}"><img alt="logo" src="{{ asset('admin-assets/assets/img/header-logo.png') }}"> </a>
+                <a class="navbar-brand" href="dashboard"><img alt="logo" src="{{ asset('admin-assets/assets/img/header-logo.png') }}"> </a>
             </div>
 
 
@@ -176,7 +177,7 @@
 
                     <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
                         <div class="dropdown-item">
-                            <a href="{{ route('admin_profile') }}">
+                            <a href="admin_profile">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="feather feather-user">
@@ -198,7 +199,7 @@
                             </a>
                         </div>
                         <div class="dropdown-item">
-                            <a href="{{ route('admin_login') }}">
+                            <a href="logout">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="feather feather-log-out">
@@ -226,19 +227,19 @@
             <nav id="topbar">
                 <ul class="navbar-nav theme-brand flex-row  text-center">
                     <li class="nav-item theme-logo">
-                        <a href="{{ route('admin') }}">
+                        <a href="dashboard">
                             <img src="{{ asset('admin-assets/assets/img/header-logo.png') }}" class="navbar-logo" alt="logo">
                         </a>
                     </li>
                     <li class="nav-item theme-text">
-                        <a href="{{ route('admin') }}" class="nav-link"> </a>
+                        <a href="dashboard" class="nav-link"> </a>
                     </li>
                 </ul>
 
                 <ul class="list-unstyled menu-categories" id="topAccordion">
 
                     <li class="menu single-menu">
-                        <a href="{{ route('admin') }}" aria-expanded="true"
+                        <a href="dashboard" aria-expanded="true"
                             class="dropdown-toggle autodroprown">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -253,9 +254,9 @@
                     </li>
 
                     <li class="menu single-menu active">
-                        <a href="students.html" aria-expanded="true"
+                        <a href="students" aria-expanded="true"
                             class="dropdown-toggle autodroprown">
-                            <div class="{{ route('students') }}">
+                            <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="feather feather-home">
@@ -318,17 +319,19 @@
                                         <div id="defaultAccordionThree" class="collapse" aria-labelledby="headingThree1"
                                             data-parent="#toggleAccordion">
                                             <div class="card-body">
-                                                <form>
+                                                <form id="frmStudentRegistration">
                                                     <div class="form-group mb-4">
-                                                        <input type="text" class="form-control" id="lFullName" placeholder="Full Name">
+                                                        <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" required>
                                                     </div>
                                                     <div class="form-group mb-4">
-                                                        <input type="email" class="form-control" id="sEmail" aria-describedby="emailHelp1" placeholder="Email address">
+                                                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp1" placeholder="Email address" required>
                                                     </div>
                                                     <div class="form-group mb-4">
-                                                        <input type="password" class="form-control" id="sPassword" placeholder="Password">
+                                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+
+                                                    <button type="submit" id="btnStudentRegistration" class="btn btn-primary mt-3 message">Submit</button>
+                                                    @csrf
                                                 </form>
                     
                                             </div>
@@ -344,16 +347,21 @@
                             <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
                                 <thead>
                                     <tr>
+                                        <th>id</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Profile</th>
+                                        <th>Account Status</th>
                                         <th class="dt-no-sorting">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>                                   
-                                    <tr>
-                                        <td>Test</td>
-                                        <td>test@gmaiil.com</td>
+                                <tbody>  
+                                    
+                                    @foreach ($students as $student )
+                                        <tr>
+                                        <td>{{ $student['id'] }}</td>
+                                        <td>{{ $student['name'] }}</td>
+                                        <td>{{ $student['email'] }}</td>
                                         <td>
                                             <div class="d-flex">
                                                 <div class="usr-img-frame mr-2 rounded-circle">
@@ -361,6 +369,12 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        @if ($student['status'] == 1)
+                                        <td><button class="btn btn-success mb-2"><a href="{{ url('/status_student',$student->id) }}">Active</a></button></td>
+                                        @else
+                                        <td><button class="btn btn-danger mb-2"><a href="{{ url('/status_student',$student->id) }}">Deactive</a></button></td>
+                                        @endif
+
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-dark btn-sm">Open</button>
@@ -376,41 +390,13 @@
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuReference28">
                                                     <a class="dropdown-item" href="#">Action</a>
                                                     <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#">Delete</a>
+                                                    <a class="dropdown-item" href="{{url('/delete_student',$student->id)}}">Delete</a>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>Test</td>
-                                        <td>test@gmaiil.com</td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <div class="usr-img-frame mr-2 rounded-circle">
-                                                    <img alt="avatar" class="img-fluid rounded-circle" src="{{ asset('admin-assets/assets/img/boy-2.png') }}">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-dark btn-sm">Open</button>
-                                                <button type="button" class="btn btn-dark btn-sm dropdown-toggle dropdown-toggle-split"
-                                                    id="dropdownMenuReference28" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false" data-reference="parent">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" class="feather feather-chevron-down">
-                                                        <polyline points="6 9 12 15 18 9"></polyline>
-                                                    </svg>
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuReference28">
-                                                    <a class="dropdown-item" href="#">Action</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#">Delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    @endforeach                                 
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -442,7 +428,12 @@
     <!-- END MAIN CONTAINER -->
 
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
-    <script src="{{ asset('admin-assets/assets/js/libs/jquery-3.1.1.min.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {{-- <script src="{{ asset('admin-assets/assets/js/libs/jquery-3.1.1.min.js') }}"></script> --}}
+    <script src="{{ asset('admin-assets/assets/js/functions.js') }}"></script>
     <script src="{{ asset('admin-assets/bootstrap/js/popper.min.js') }}"></script>
     <script src="{{ asset('admin-assets/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('admin-assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
@@ -490,6 +481,42 @@
         });
     </script>
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+
+
+
+   
+    <script>
+    // ================================================
+    // |            Student Registration              |
+    // ================================================
+   
+        // alert('test');
+        jQuery("#frmStudentRegistration").submit(function (e) {
+            e.preventDefault();
+            // alert('test');
+            jQuery('#btn').attr('disabled',true)
+            jQuery('#btn').attr('value',"PLease Wait..")
+            jQuery.ajax({
+                url: "{{ url('admin/studentregistraiton') }}",
+                data: jQuery("#frmStudentRegistration").serialize(),
+                type: "post",
+                
+                success: function(result){
+                    Swal.fire(
+                        'success',
+                        'Student Added',
+                        'success'
+                    )
+                    jQuery('#frmStudentRegistration')['0'].reset();
+                    jQuery('#btn').attr('disabled',false)
+                    jQuery('#btn').attr('value',"Submit")
+                    setTimeout(location.reload.bind(location), 1000);
+
+                }
+            });
+        });
+    </script>
+
 </body>
 
 

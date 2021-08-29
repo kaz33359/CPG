@@ -24,24 +24,47 @@
 				<div class="row">
 					<div class="col-sm-12 col-lg-6 offset-lg-3">
 						<div class="login_form inner_page">
-							<form action="#">
+							 <form class="text-left" method="POST" action="{{ route('student.auth') }}">
+                            @csrf
 								<div class="heading">
 									<h3 class="text-center">Login to your account</h3>
 								</div>
 								<div class="form-group">
-									<input type="email" class="form-control" id="exampleInputEmail3"
-										placeholder="Email Address">
+									<input type="email" name="email" class="form-control" id="exampleInputEmail3"
+										placeholder="Email Address" required>
 								</div>
 								<div class="form-group">
-									<input type="password" class="form-control" id="exampleInputPassword4"
-										placeholder="Password">
+									<input type="password" name="password" class="form-control" id="exampleInputPassword4"
+										placeholder="Password" required>
 								</div>
 								<div class="form-group custom-control custom-checkbox">
 									<input type="checkbox" class="custom-control-input" id="exampleCheck3">
 									<label class="custom-control-label" for="exampleCheck3">Remember me</label>
 									<a class="tdu btn-fpswd float-right" href="#">Forgot Password?</a>
 								</div>
+								@if(session('error'))
+								<div class="ui_kit_message_box">
+									<div class="alert alert-primary alert-dismissible fade show" role="alert">
+										 {{ session('error') }}
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+								</div>
+                                @endif
+								@if(session('logout'))
+								<div class="ui_kit_message_box">
+									<div class="alert alert-primary alert-dismissible fade show" role="alert">
+										 {{ session('logout') }}
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+								</div>
+                                @endif
 								<button type="submit" class="btn btn-log btn-block btn-thm2">Login</button>
+
+								
 							</form>
 						</div>
 					</div>

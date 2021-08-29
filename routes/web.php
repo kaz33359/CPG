@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AdminController;
 
 
@@ -23,7 +24,7 @@ Route::get('/', [PagesController::class, 'index'])->name('home');
 Route::get('/about', [PagesController::class, 'about'])->name('about');
 Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
 Route::get('/blog', [PagesController::class, 'blog'])->name('blog');
-Route::get('/login', [PagesController::class, 'login'])->name('login');
+Route::get('/login', [StudentController::class, 'index'])->name('login');
 
 
 Route::get('/consultancy-services', [PagesController::class, 'consultancyServices'])->name('consultancy-services');
@@ -33,6 +34,21 @@ Route::get('/OTHM', [PagesController::class, 'OTHM'])->name('OTHM');
 Route::get('/safety-manpower-solution', [PagesController::class, 'safety_manpower_solution'])->name('safety-manpower-solution');
 Route::get('/STED', [PagesController::class, 'STED'])->name('STED');
 
+
+Route::get('student', [StudentController::class, 'index']);
+Route::post('student/auth', [StudentController::class, 'auth'])->name('student.auth');
+
+Route::group(['middleware' => 'student_auth'], function () {
+
+    Route::get('student/dashboard', [StudentController::class, 'dashboard'])->name('dashboard');
+    Route::get('student/logout', function () {
+        session()->forget('STUDENT_LOGIN');
+        session()->forget('STUDENT_ID');
+        session()->flash('logout', 'Logout Successfully');
+        return redirect('student');
+    });
+    
+});
 
 
 
@@ -49,7 +65,34 @@ Route::group(['middleware'=> 'admin_auth'],function(){
         return redirect('admin');
     });
 
+    Route::get('admin/students', [AdminController::class, 'students'])->name('students');
+    // Route::post('admin/studentregistraiton', [AdminController::class, 'studentregistraiton'])->name('admin.studentregistraiton');
+    Route::post('admin/studentregistraiton', [AdminController::class, 'studentregistraiton']);
+    Route::get("/delete_student/{id}", [AdminController::class, "delete_student"]);
+    Route::get("/status_student/{id}", [AdminController::class, "status_student"]);
+    // Route::post('admin/studentRegistration_process', [AdminController::class, 'studentRegistration_process'])->name('admin.studentRegistration_process');
+
+
 });
+
+// Route::group(['middleware'=> 'admin_auth'],function(){
+//     Route::get('admin/dashboard', [AdminController::class,'dashboard'])->name('dashboard');
+    
+//     Route::get('admin/logout', function () {
+//         session()->forget('ADMIN_LOGIN');
+//         session()->forget('ADMIN_ID');
+//         session()->flash('logout', 'Logout Successfully');
+//         return redirect('admin');
+//     });
+
+//     Route::get('admin/students', [AdminController::class, 'students'])->name('students');
+//     // Route::post('admin/studentregistraiton', [AdminController::class, 'studentregistraiton'])->name('admin.studentregistraiton');
+//     Route::post('admin/studentregistraiton', [AdminController::class, 'studentregistraiton']);
+//     Route::get("/delete_student/{id}", [AdminController::class, "delete_student"]);
+//     // Route::post('admin/studentRegistration_process', [AdminController::class, 'studentRegistration_process'])->name('admin.studentRegistration_process');
+
+
+// });
 
 // Route::get('/admin/login', [AdminController::class, 'admin_login'])->name('admin_login');
 // Route::get('/admin/students', [AdminController::class, 'students'])->name('students');

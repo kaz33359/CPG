@@ -235,7 +235,7 @@
                 <ul class="list-unstyled menu-categories" id="topAccordion">
 
                     <li class="menu single-menu active">
-                        <a href="{{ route('dashboard') }}" aria-expanded="true"
+                        <a href="dashboard" aria-expanded="true"
                             class="dropdown-toggle autodroprown">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -250,7 +250,7 @@
                     </li>
 
                     <li class="menu single-menu">
-                        <a href="" aria-expanded="true"
+                        <a href="students" aria-expanded="true"
                             class="dropdown-toggle autodroprown">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
