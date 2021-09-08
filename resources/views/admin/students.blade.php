@@ -23,6 +23,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/plugins/table/datatable/datatables.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/plugins/table/datatable/custom_dt_html5.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/plugins/table/datatable/dt-global_style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/plugins/table/datatable/custom_dt_custom.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/assets/css/elements/alert.css') }}">
+
 
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
 
@@ -239,7 +242,7 @@
                 <ul class="list-unstyled menu-categories" id="topAccordion">
 
                     <li class="menu single-menu">
-                        <a href="dashboard" aria-expanded="true"
+                        <a href="{{ url('admin/dashboard') }}" aria-expanded="true"
                             class="dropdown-toggle autodroprown">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -253,8 +256,23 @@
                         </a>
                     </li>
 
+                    <li class="menu single-menu">
+                        <a href="{{ url('admin/courses') }}" aria-expanded="true"
+                            class="dropdown-toggle autodroprown">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-home">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                </svg>
+                                <span>Courses</span>
+                            </div>
+                        </a>
+                    </li>
+
                     <li class="menu single-menu active">
-                        <a href="students" aria-expanded="true"
+                        <a href="{{ url('admin/students') }}" aria-expanded="true"
                             class="dropdown-toggle autodroprown">
                             <div class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -319,19 +337,51 @@
                                         <div id="defaultAccordionThree" class="collapse" aria-labelledby="headingThree1"
                                             data-parent="#toggleAccordion">
                                             <div class="card-body">
-                                                <form id="frmStudentRegistration">
-                                                    <div class="form-group mb-4">
-                                                        <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" required>
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp1" placeholder="Email address" required>
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-                                                    </div>
-
-                                                    <button type="submit" id="btnStudentRegistration" class="btn btn-primary mt-3 message">Submit</button>
+                                                @if(Session::has('success'))
+                                                <div class="alert alert-light-success border-0 mb-4" role="alert"> 
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-dismiss="alert"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                                    </button>
+                                                    <strong>Success!</strong> {{Session::get('success')}}
+                                                </div> 
+                                                @endif   
+                                                <form id="" method="POST" action="{{ route('studentregistraiton') }}">
                                                     @csrf
+                                                    <div class="form-row mb-4"> 
+                                                        <div class="form-group col-md-6">
+                                                            <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" required>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <input type="number" class="form-control" id="mobile" name="mobile" aria-describedby="emailHelp1" placeholder="Mobile Number"  required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row mb-4"> 
+                                                        <div class="form-group col-md-6">
+                                                            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp1" placeholder="Email address" required>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                                                        </div>
+                                                    </div>                                            
+                                                    <div class="form-group mb-4">
+                                                        <label for="inputState">Course</label>
+                                                        <select id="inputState" name="course_id" class="form-control"  required>
+                                                            @foreach ($courses as $course)
+                                                             <option value="{{ $course->id }}">{{ $course->course_name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>           
+                                                    @if ($errors->any())
+                                                        @foreach ($errors->all() as $err)
+                                                            <div class="alert alert-light-danger border-0 mb-4" role="alert"> 
+                                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-dismiss="alert"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                                                </button>
+                                                                <strong>Error!</strong> {{ $err }}
+                                                            </div>
+                                                        @endforeach
+                                                    @endif
+                                                    <button type="submit" id="" class="btn btn-primary mt-3 message">Submit</button>
                                                 </form>
                     
                                             </div>
@@ -344,12 +394,14 @@
 
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                         <div class="widget-content widget-content-area br-6">
-                            <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
+                            <table id="html5-extension" class="table style-3 table-hover non-hover" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>id</th>
                                         <th>Name</th>
                                         <th>Email</th>
+                                        <th>Mobile</th>
+                                        <th>Course</th>
                                         <th>Profile</th>
                                         <th>Account Status</th>
                                         <th class="dt-no-sorting">Action</th>
@@ -357,11 +409,13 @@
                                 </thead>
                                 <tbody>  
                                     
-                                    @foreach ($students as $student )
+                                    @foreach ($students_data as $student )
                                         <tr>
                                         <td>{{ $student['id'] }}</td>
                                         <td>{{ $student['name'] }}</td>
                                         <td>{{ $student['email'] }}</td>
+                                        <td>{{ $student['mobile'] }}</td>
+                                        <td>{{ $student['course_name'] }}</td>
                                         <td>
                                             <div class="d-flex">
                                                 <div class="usr-img-frame mr-2 rounded-circle">
@@ -374,26 +428,40 @@
                                         @else
                                         <td><button class="btn btn-danger mb-2"><a href="{{ url('/status_student',$student->id) }}">Deactive</a></button></td>
                                         @endif
-
-                                        <td>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-dark btn-sm">Open</button>
-                                                <button type="button" class="btn btn-dark btn-sm dropdown-toggle dropdown-toggle-split"
-                                                    id="dropdownMenuReference28" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false" data-reference="parent">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" class="feather feather-chevron-down">
-                                                        <polyline points="6 9 12 15 18 9"></polyline>
-                                                    </svg>
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuReference28">
-                                                    <a class="dropdown-item" href="#">Action</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="{{url('/delete_student',$student->id)}}">Delete</a>
-                                                </div>
-                                            </div>
+                                        <td class="text-center">
+                                            <ul class="table-controls">
+                                                <li><a href="{{ url('admin/student_profile',$student->id) }}" class="bs-tooltip"
+                                                        data-toggle="tooltip" data-placement="top" title=""
+                                                        data-original-title="Edit"><svg
+                                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="feather feather-edit-2 p-1 br-6 mb-1">
+                                                            <path
+                                                                d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z">
+                                                            </path>
+                                                        </svg></a></li>
+                                                <li>
+                                                    <a href="{{url('/delete_student',$student->id)}}" class="bs-tooltip"
+                                                        data-toggle="tooltip" data-placement="top" title=""
+                                                        data-original-title="Delete Course"><svg
+                                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="feather feather-trash p-1 br-6 mb-1">
+                                                            <polyline points="3 6 5 6 21 6"></polyline>
+                                                            <path
+                                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                            </path>
+                                                        </svg>
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </td>
+
+                                        
                                     </tr>
                                     @endforeach                                 
                                     

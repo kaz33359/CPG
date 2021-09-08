@@ -3,11 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Chapter;
 use App\Models\Student;
+use App\Models\Course;
+use App\Models\Material;
+use App\Models\Module;
+use App\Models\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+// use stoage;
 
+
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+
+use function PHPUnit\Framework\returnSelf;
 
 class AdminController extends Controller
 {
@@ -59,22 +72,52 @@ class AdminController extends Controller
 
     public function students()
     {
-        $students = Student::all();
-        return view('admin.students',['students' => $students]);
+
+        // $students = Student::all();
+        $courses = DB::table('courses')->select('*')->where('status', [1])->get();
+        // $courses = DB::select('select * from courses where status = ?', [1]);
+       
+        // select students.*, courses.course_name from students inner join courses on students.course_id = courses.id
+        $students_data = Student::join('courses', 'students.course_id', '=', 'courses.id')
+            ->get(['students.*', 'courses.course_name']);
+
+        return view('admin.students',['students_data' => $students_data, 'courses' => $courses]);
+    }
+
+    public function viewStudents($id)
+    {
+        $courses = DB::table('courses')->select('*')->where('status', [1])->get();
+
+        $students_data = Student::join('courses', 'students.course_id', '=', 'courses.id')
+            ->where('students.id', [$id])
+            ->get(['students.*', 'courses.course_name']);
+
+        return view('admin.student-profile',['students_data' => $students_data, 'courses' => $courses ]);
     }
 
     public function studentregistraiton(Request $request)
     {
-        
-         
-            $model = new Student;
-            $model->name = $request->post('name');
-            $model->email = $request->post('email');
-            $model->password = Hash::make($request->post('password'));
-            $model->save();
-            return response()->json($model);
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|unique:students|max:255',
+            'mobile' => 'required|min:10',
+            'password' => 'required|min:6',
+            'course_id' => 'required',
+        ]);
+
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $mobile = $request->input('mobile');
+        $course_id = $request->input('course_id');
+        $password = Hash::make($request->input('password')); 
+        $data = array('name' => $name, "email" => $email, "mobile" => $mobile, "course_id" =>$course_id, "password" => $password);
+        DB::table('students')->insert($data);
+        return back()->with('success', 'Student have been added');
+        // return response()->json($model);
     
     }
+
+    
 
 
     public function delete_student($id)
@@ -98,6 +141,287 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
+    // ################################ Course ################################
+
+    public function courses()
+    {
+        $courses = Course::all();
+        return view('admin.courses', ['courses' => $courses]);
+    }
+
+    public function addCourse(Request $request)
+    {
+        $request->validate([
+            'course_name' => 'required|unique:courses|max:255',
+        ]);
+
+        Course::create($request->all());
+        return back()->with('success', 'Course have been added');
+
+    }
+    public function delete_Course($id)
+    {
+        $data = Course::find($id);
+        $data->delete();
+        return redirect()->back();
+    }
+
+    public function status_Course($id)
+    {
+        $data = Course::find($id);
+        if ($data->status == 1) {
+            $data->status = 0;
+            $data->save();
+        } else {
+            $data->status = 1;
+            $data->save();
+        }
+        return redirect()->back();
+    }
+
+    public function viewCourse($id)
+    {
+        $courses = DB::table('courses')->select('*')->where('id', [$id])->get();
+
+        $modules = DB::table('modules')->select('*')->where('course_id', [$id])->get();
+        $modules_view = DB::table('modules')->where('course_id', $id)->where('status', 1)->get();
+
+        // return $modules_view;
+
+        $chapters = Chapter::join('modules','chapters.module_id','=','modules.id')
+        ->where('chapters.course_id', [$id])
+        ->get(['chapters.*', 'modules.module_name']);
+        $chapters_view = DB::table('chapters')->select('*')->where('course_id', [$id])->where('status',[1])->get();
+
+        // return $modules_view;
+
+        $topics = DB::table('topics')
+        ->join('modules','topics.module_id' ,'=','modules.id')
+        ->join('chapters', 'topics.chapter_id' ,'=', 'chapters.id')
+        ->get(['topics.*', 'chapters.chapter_name','modules.module_name']);
+        $topics_view = DB::table('topics')->select('*')->where('course_id', [$id])->where('status', [1])->get();
+        
+        $materials = DB::table('materials')
+        ->join('topics', 'materials.topic_id' ,'=', 'topics.id')
+        ->get(['materials.*', 'topics.topic_name']);
+        $materials_view = DB::table('materials')->select('*')->where('status', [1])->get();
+
+
+        // return dd($topics_view); 
+
+        return view('admin.course-view', [
+            'courses' => $courses,
+
+            'modules'=> $modules,
+            'modules_view'=> $modules_view,
+
+            'chapters'=> $chapters,
+            'chapters_view'=> $chapters_view,
+
+            'topics'=> $topics,
+            'topics_view'=> $topics_view,
+
+            'materials'=> $materials,
+            'materials_view'=> $materials_view
+
+
+            ]);
+    }
+
+    // ################################ Module ################################
+
+
+
+    public function addmodule(Request $request)
+    {
+        $request->validate([
+            'course_id' => 'required|max:255',
+            'module_name' => 'required|unique:modules|max:255',
+        ]);
+
+        Module::create($request->all());
+        return back()->with('module_success', 'Module have been added');
+    }
+    
+    public function delete_module($id)
+    {
+        $data = Module::find($id);
+        $data->delete();
+        return redirect()->back();
+    }
+
+    public function status_module($id)
+    {
+        $data = Module::find($id);
+        // $data->delete();
+        if ($data->status == 1) {
+            $data->status = 0;
+            $data->save();
+        } else {
+            $data->status = 1;
+            $data->save();
+        }
+        return redirect()->back();
+    }
+
+    public function get_module($id){
+
+        $modules_select = DB::table('modules')->where('course_id', $id)->where('status', 1)->get();
+        return dd($modules_select);
+
+    }
+
+
+    // ################################ Chapter ################################
+
+
+    public function addchapter(Request $request)
+    {
+        $request->validate([
+            'course_id' => 'required|max:255',
+            'module_id' => 'required|max:255',
+            'chapter_name' => 'required|max:255',
+        ]);
+
+        Chapter::create($request->all());
+        return back()->with('chapter_success', 'Chapter have been added');
+    }
+    
+    public function delete_chapter($id)
+    {
+        $data = Chapter::find($id);
+        $data->delete();
+        return redirect()->back();
+    }
+
+    public function status_chapter($id)
+    {
+        $data = Chapter::find($id);
+        // $data->delete();
+        if ($data->status == 1) {
+            $data->status = 0;
+            $data->save();
+        } else {
+            $data->status = 1;
+            $data->save();
+        }
+        return redirect()->back();
+    }
+
+    public function get_chapter($id)
+    {
+
+        $chapters_select = DB::table('chapters')->select('*')->where('course_id', [$id])->where('status', [1])->get();
+        return dd($chapters_select);
+    }
+    
+    // ################################ Topic ################################
+
+    public function addtopic(Request $request)
+    {
+        // return dd($request);
+        $request->validate([
+            'course_id' => 'required|max:255',
+            'module_id' => 'required|max:255',
+            'chapter_id' => 'required|max:255',
+            'topic_description' => 'required|max:2048',
+            'topic_name' => 'required|max:255',
+        ]);
+
+
+        // return dd($topic_doc_name);
+        Topic::create($request->all());
+
+        // Topic::create([
+        //     'course_id' => $request->input('course_id'),
+        //     'module_id' => $request->input('module_id'),
+        //     'chapter_id' => $request->input('chapter_id'),
+        //     'topic_description' => $request->input('topic_description'),
+        //     'topic_name' => $request->input('topic_name'),
+        // ]);
+
+        return back()->with('topic_success', 'Topic have been added');
+    }
+
+    public function delete_topic($id)
+    {
+        $data = Topic::find($id);
+        $data->delete();
+        return redirect()->back();
+    }
+
+    public function status_topic($id)
+    {
+        $data = Topic::find($id);
+        // $data->delete();
+        if ($data->status == 1) {
+            $data->status = 0;
+            $data->save();
+        } else {
+            $data->status = 1;
+            $data->save();
+        }
+        return redirect()->back();
+    }
+
+
+    // ################################ Material ################################
+
+    public function addmaterial(Request $request)
+    {
+
+        // return dd($request);
+        $request->validate([
+            'topic_id' => 'required|max:255',
+            'material_video' => 'required|mimes:mp4',
+            'material_doc' => 'required|mimes:pdf,pptx'
+        ]);
+
+        $material_doc_name = time() . '-' . $request->file('material_doc')->getClientOriginalName();
+        $material_video_name =  time() . '-' . $request->file('material_video')->getClientOriginalName();
+
+        $request->material_doc->move(public_path('uploads'), $material_doc_name);
+        $request->material_video->move(public_path('uploads'), $material_video_name);
+
+
+
+        // // return dd($topic_doc_name);
+
+        Material::create([
+            'topic_id' => $request->input('topic_id'),
+            'material_video' => $material_video_name,
+            'material_doc' => $material_doc_name,
+        ]);
+
+        return back()->with('material_success', 'Materials have been added');
+    }
+
+    public function delete_material($id)
+    {
+        $data = Material::find($id);
+        $material_video = $data['material_video'];
+        $material_doc = $data['material_doc'];
+
+        File::delete(["uploads/$material_doc"]);
+        File::delete(["uploads/$material_video"]);
+
+        $data->delete();
+        return redirect()->back();
+    }
+
+    public function status_material($id)
+    {
+
+        $data = Material::find($id);
+        if ($data->status == 1) {
+            $data->status = 0;
+            $data->save();
+        } else {
+            $data->status = 1;
+            $data->save();
+        }
+        return redirect()->back();
+    }
 
    
 }

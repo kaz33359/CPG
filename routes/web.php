@@ -66,35 +66,42 @@ Route::group(['middleware'=> 'admin_auth'],function(){
     });
 
     Route::get('admin/students', [AdminController::class, 'students'])->name('students');
-    // Route::post('admin/studentregistraiton', [AdminController::class, 'studentregistraiton'])->name('admin.studentregistraiton');
-    Route::post('admin/studentregistraiton', [AdminController::class, 'studentregistraiton']);
+    Route::any('admin/studentregistraiton', [AdminController::class, 'studentregistraiton'])->name('studentregistraiton');
     Route::get("/delete_student/{id}", [AdminController::class, "delete_student"]);
     Route::get("/status_student/{id}", [AdminController::class, "status_student"]);
-    // Route::post('admin/studentRegistration_process', [AdminController::class, 'studentRegistration_process'])->name('admin.studentRegistration_process');
+    Route::get('admin/student_profile/{id}', [AdminController::class, 'viewStudents'])->name('student_profile');
+
+    Route::get('admin/courses', [AdminController::class, 'courses'])->name('courses');
+    Route::post('admin/addcourse', [AdminController::class, 'addCourse'])->name('addcourse');
+    Route::get("/delete_course/{id}", [AdminController::class, "delete_Course"]);
+    Route::get("/status_course/{id}", [AdminController::class, "status_Course"]);
+    Route::get('admin/view_course/{id}', [AdminController::class, 'viewCourse'])->name('viewCourse');
+
+
+    Route::get('admin/module', [AdminController::class, 'module'])->name('module');
+    Route::post('admin/addmodule', [AdminController::class, 'addmodule'])->name('addmodule');
+    Route::get("/delete_module/{id}", [AdminController::class, "delete_module"]);
+    Route::get("/status_module/{id}", [AdminController::class, "status_module"]);
+
+    Route::get('admin/chapter', [AdminController::class, 'chapter'])->name('chapter');
+    Route::post('admin/addchapter', [AdminController::class, 'addchapter'])->name('addchapter');
+    Route::get("/delete_chapter/{id}", [AdminController::class, "delete_chapter"]);
+    Route::get("/status_chapter/{id}", [AdminController::class, "status_chapter"]);
+
+    Route::get('admin/topic', [AdminController::class, 'topic'])->name('topic');
+    Route::post('admin/addtopic', [AdminController::class, 'addtopic'])->name('addtopic');
+    Route::get("/delete_topic/{id}", [AdminController::class, "delete_topic"]);
+    Route::get("/status_topic/{id}", [AdminController::class, "status_topic"]);
+
+    Route::get('admin/material', [AdminController::class, 'material'])->name('material');
+    Route::post('admin/addmaterial', [AdminController::class, 'addmaterial'])->name('addmaterial');
+    Route::get("/delete_material/{id}", [AdminController::class, "delete_material"]);
+    Route::get("/status_material/{id}", [AdminController::class, "status_material"]);
+
+
+    // Route::get("/get_module/{id}", [AdminController::class, "get_module"]);
+    // Route::get("/get_chapter/{id}", [AdminController::class, "get_chapter"]);
+
 
 
 });
-
-// Route::group(['middleware'=> 'admin_auth'],function(){
-//     Route::get('admin/dashboard', [AdminController::class,'dashboard'])->name('dashboard');
-    
-//     Route::get('admin/logout', function () {
-//         session()->forget('ADMIN_LOGIN');
-//         session()->forget('ADMIN_ID');
-//         session()->flash('logout', 'Logout Successfully');
-//         return redirect('admin');
-//     });
-
-//     Route::get('admin/students', [AdminController::class, 'students'])->name('students');
-//     // Route::post('admin/studentregistraiton', [AdminController::class, 'studentregistraiton'])->name('admin.studentregistraiton');
-//     Route::post('admin/studentregistraiton', [AdminController::class, 'studentregistraiton']);
-//     Route::get("/delete_student/{id}", [AdminController::class, "delete_student"]);
-//     // Route::post('admin/studentRegistration_process', [AdminController::class, 'studentRegistration_process'])->name('admin.studentRegistration_process');
-
-
-// });
-
-// Route::get('/admin/login', [AdminController::class, 'admin_login'])->name('admin_login');
-// Route::get('/admin/students', [AdminController::class, 'students'])->name('students');
-// Route::get('/admin/admin-profile', [AdminController::class, 'admin_profile'])->name('admin_profile');
-
