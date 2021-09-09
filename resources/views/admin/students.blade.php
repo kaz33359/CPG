@@ -568,7 +568,6 @@
                 url: "{{ url('admin/studentregistraiton') }}",
                 data: jQuery("#frmStudentRegistration").serialize(),
                 type: "post",
-                
                 success: function(result){
                     Swal.fire(
                         'success',

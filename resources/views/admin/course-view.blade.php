@@ -187,7 +187,7 @@
                             </a>
                         </div>
                         <div class="dropdown-item">
-                            <a href="logout">
+                            <a href="{{ route('logout') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="feather feather-log-out">
@@ -333,12 +333,21 @@
                         <div class="skills layout-spacing ">
                             <div class="widget-content widget-content-area">
                                 <h3 class="">Edit Course Info</h3>
+                                 @if(Session::has('course_update_success'))
+                                    <div class="alert alert-light-success border-0 mb-4" role="alert"> 
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-dismiss="alert"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                        </button>
+                                        <strong>Success!</strong> {{Session::get('course_update_success')}}
+                                    </div> 
+                                @endif    
                                 @foreach ($courses as $course_data)
-                                    <form id="frmStudentRegistration">
+                                    <form action="{{ route('updatecourse',$course_data->id) }}" method="POST">
+                                        @csrf
                                         <div class="form-group mb-4">
                                             <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" value="{{ $course_data -> course_name }}" >
                                         </div>
-                                        <button type="submit" id="btnStudentRegistration" class="btn btn-primary mt-3 message">Submit</button>
+                                        <button type="submit" class="btn btn-primary mt-3 message">Submit</button>
                                     @csrf
                                     </form>
                                 @endforeach
@@ -710,19 +719,22 @@
                                                 <form id="" action="{{ route('addmaterial') }}" method="POST" enctype="multipart/form-data">
                                                     @csrf
                                                     <div class="form-group mb-4">
-                                                        <label for="inputState">Video Material</label>
+                                                        <label for="inputState">Material</label>
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="material_video" name="material_video">
-                                                            <label class="custom-file-label" for="customFile">Choose Video</label>
+                                                            <input type="file" class="custom-file-input" id="material" name="material">
+                                                            <label class="custom-file-label" for="customFile">Choose Material</label>
                                                         </div>
                                                     </div>
                                                     <div class="form-group mb-4">
-                                                        <label for="inputState">Document Material</label>
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="material_doc" name="material_doc">
-                                                            <label class="custom-file-label" for="customFile">Choose Document</label>
-                                                        </div>
+                                                        <label for="inputState">Material Type</label>
+                                                        <select id="inputState" name="material_type" class="form-control"  required>
+                                                           <option value="video">Video</option>
+                                                           <option value="ppt">PPT</option>
+                                                           <option value="document">Document</option>
+                                                           <option value="pdf">PDF</option>
+                                                        </select>
                                                     </div>
+                                                    
                                                     <div class="form-group mb-4">
                                                         <label for="inputState">Topic</label>
                                                         <select id="inputState" name="topic_id" class="form-control"  required>
@@ -782,8 +794,8 @@
                                                                 <tr>
                                                                     <th>Material Id</th>
                                                                     <th>Topic Name</th>
-                                                                    <th>Doc</th>
-                                                                    <th>video</th>
+                                                                    <th>Material</th>
+                                                                    <th>Material Type</th>
                                                                     <th>Material Status</th>
                                                                     <th class="dt-no-sorting">Action</th>
                                                                 </tr>
@@ -793,8 +805,8 @@
                                                                     <tr>
                                                                     <td>{{ $material-> id}}</td>
                                                                     <td>{{ $material-> topic_name}}</td>
-                                                                    <td>{{ $material-> material_doc }}</td>
-                                                                    <td>{{ $material-> material_video }}</td>
+                                                                    <td>{{ $material-> material}}</td>
+                                                                    <td>{{ $material-> material_type }}</td>
                                                                     @if ($material-> status == 1)
                                                                     <td><button class="btn btn-success mb-2"><a href="{{ url('/status_material',$material->id) }}">Active</a></button></td>
                                                                     @else
@@ -885,14 +897,35 @@
                                                                             @foreach ($materials_view as $material_view)
                                                                                 @if ($material_view -> topic_id == $topic_view -> id)
                                                                                     <div class="post-contributers">
-                                                                                        <a href="{{ asset('uploads/'.$material_view -> material_video) }}"><img src="{{ asset('admin-assets/assets/img/profile-6.jpg') }}" alt="timeline"></a>
-                                                                                        <a href="{{ asset('uploads/'.$material_view -> material_doc) }}"><img src="{{ asset('admin-assets/assets/img/profile-6.jpg') }}" alt="timeline"></a>
-                                                                                    </div>
-                                                                                @else
-                                                                                    <div class="post-contributers">
-                                                                                        <h3> Please Add Topic Materials!! </h3>
+                                                                                        @switch($material_view -> material_type)
+                                                                                            @case('pdf')
+                                                                                                <a href="{{ asset('uploads/'.$material_view -> material) }}"><img src="{{ asset('admin-assets/assets/img/pdf.jpg') }}" alt="timeline"></a>
+                                                                                                @break
+                                                                                            @case('video')
+                                                                                                <a href="{{ asset('uploads/'.$material_view -> material) }}"><img src="{{ asset('admin-assets/assets/img/video.jpg') }}" alt="timeline"></a>
+                                                                                                @break
+                                                                                            @case('document')
+                                                                                                <a href="{{ asset('uploads/'.$material_view -> material) }}"><img src="{{ asset('admin-assets/assets/img/documenticon.jpg') }}" alt="timeline"></a>
+                                                                                                @break
+                                                                                            @case('ppt')
+                                                                                                <a href="{{ asset('uploads/'.$material_view -> material) }}"><img src="{{ asset('admin-assets/assets/img/ppt.jpg') }}" alt="timeline"></a>
+                                                                                                @break
+                                                                                            @default
+                                                                                                <a href="{{ asset('uploads/'.$material_view -> material) }}">{{$material_view -> material_type}}</a>  
+                                                                                        @endswitch
                                                                                     </div>
                                                                                 @endif
+                                                                                {{-- @if ($materials_view -> isEmpty())
+                                                                                    <h1> Please Add Course Materials!! </h1>
+                                                                                @else
+                                                                                    @if ($material_view -> topic_id == $topic_view -> id)
+                                                                                        <div class="post-contributers">
+                                                                                            <a href="{{ asset('uploads/'.$material_view -> material) }}"><img src="{{ asset('admin-assets/assets/img/profile-6.jpg') }}" alt="timeline"></a>
+                                                                                        </div>
+                                                                                     @else
+                                                                                        <h4> Please Add Course Materials!! </h4>
+                                                                                    @endif
+                                                                                @endif --}}
                                                                             @endforeach
                                                                             
                                                                         </div>

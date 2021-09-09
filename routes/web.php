@@ -58,21 +58,23 @@ Route::post('admin/auth', [AdminController::class, 'auth'])->name('admin.auth');
 Route::group(['middleware'=> 'admin_auth'],function(){
     Route::get('admin/dashboard', [AdminController::class,'dashboard'])->name('dashboard');
     
-    Route::get('admin/logout', function () {
+    Route::get('admin/logout', function ()  {
         session()->forget('ADMIN_LOGIN');
         session()->forget('ADMIN_ID');
         session()->flash('logout', 'Logout Successfully');
         return redirect('admin');
-    });
+    })->name('logout');
 
     Route::get('admin/students', [AdminController::class, 'students'])->name('students');
     Route::any('admin/studentregistraiton', [AdminController::class, 'studentregistraiton'])->name('studentregistraiton');
+    Route::post('admin/updatestudents/{id}', [AdminController::class, 'updatestudents'])->name('updatestudents');
     Route::get("/delete_student/{id}", [AdminController::class, "delete_student"]);
     Route::get("/status_student/{id}", [AdminController::class, "status_student"]);
     Route::get('admin/student_profile/{id}', [AdminController::class, 'viewStudents'])->name('student_profile');
 
     Route::get('admin/courses', [AdminController::class, 'courses'])->name('courses');
     Route::post('admin/addcourse', [AdminController::class, 'addCourse'])->name('addcourse');
+    Route::post('admin/updatecourse/{id}', [AdminController::class, 'updatecourse'])->name('updatecourse');
     Route::get("/delete_course/{id}", [AdminController::class, "delete_Course"]);
     Route::get("/status_course/{id}", [AdminController::class, "status_Course"]);
     Route::get('admin/view_course/{id}', [AdminController::class, 'viewCourse'])->name('viewCourse');

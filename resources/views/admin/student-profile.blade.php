@@ -15,6 +15,8 @@
     
     <!--  BEGIN CUSTOM STYLE FILE  -->
     <link href="{{ asset('admin-assets/assets/css/users/user-profile.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin-assets/assets/css/elements/alert.css') }}">
+
     <!--  END CUSTOM STYLE FILE  -->
 </head>
 <body class="sidebar-noneoverflow">
@@ -179,7 +181,7 @@
                             </a>
                         </div>
                         <div class="dropdown-item">
-                            <a href="logout">
+                            <a href="{{ route('logout') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="feather feather-log-out">
@@ -294,7 +296,7 @@
                                 </div>
                                 @foreach ($students_data as $student_info)
                                     <div class="text-center user-info">
-                                    <img src="assets/img/profile-3.jpg" alt="avatar">
+                                    <img src="{{ asset('admin-assets/assets/img/boy-2.png') }}" alt="avatar">
                                     <p class="">{{ $student_info->name }}</p>
                                 </div>
                                 <div class="user-info-list">
@@ -336,7 +338,7 @@
                             
                             <div class="widget-content widget-content-area">
 
-                                <h3 class="">Work Experience</h3>
+                                <h3 class="">Course Progress</h3>
                                 
                                 <div class="timeline-alter">
                                 
@@ -388,13 +390,25 @@
                         <div class="skills layout-spacing ">
                             <div class="widget-content widget-content-area">
                                 <h3 class="">Edit Student Personal Info</h3>
+                                @if(Session::has('student_update_success'))
+                                    <div class="alert alert-light-success border-0 mb-4" role="alert"> 
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-dismiss="alert"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                        </button>
+                                        <strong>Success!</strong> {{Session::get('student_update_success')}}
+                                    </div> 
+                                @endif  
                                 @foreach ($students_data as $student_data)
-                                    <form id="frmStudentRegistration">
+                                    <form action="{{ route('updatestudents',$student_data->id) }}" method="POST">
+                                        @csrf
                                         <div class="form-group mb-4">
                                             <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" value="{{ $student_data -> name }}" >
                                         </div>
                                         <div class="form-group mb-4">
                                             <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp1" placeholder="Email address"  value="{{ $student_data -> email }}">
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            <input type="number" class="form-control" id="mobile" name="mobile" aria-describedby="emailHelp1" placeholder="Email address"  value="{{ $student_data -> mobile }}">
                                         </div>
                                         <div class="form-group mb-4">
                                             <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="{{ $student_data -> password }}" >
@@ -406,9 +420,18 @@
                                                     <option value="{{ $course->id }}">{{ $course->course_name }}</option>
                                                 @endforeach
                                             </select>
-                                         </div>
+                                        </div>
+                                        @if ($errors->any())
+                                            @foreach ($errors->all() as $err)
+                                                <div class="alert alert-light-danger border-0 mb-4" role="alert"> 
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-dismiss="alert"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                                    </button>
+                                                    <strong>Error!</strong> {{ $err }}
+                                                </div>
+                                            @endforeach
+                                        @endif
                                         <button type="submit" id="btnStudentRegistration" class="btn btn-primary mt-3 message">Submit</button>
-                                    @csrf
                                     </form>
                                 @endforeach
                                 

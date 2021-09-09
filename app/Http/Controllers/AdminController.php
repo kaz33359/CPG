@@ -117,6 +117,27 @@ class AdminController extends Controller
     
     }
 
+    public function updatestudents(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|max:255',
+            'mobile' => 'required|min:10',
+            'password' => 'required|min:6',
+            'course_id' => 'required',
+        ]);
+
+        $student = Student::find($id);
+        $student->name = $request->input('name');
+        $student->email = $request->input('email');
+        $student->mobile = $request->input('mobile');
+        $student->password = Hash::make($request->input('password')); 
+        $student->course_id = $request->input('course_id');
+        $student->update();
+
+        return back()->with('student_update_success', 'Student details Have been updated');
+    }
+
     
 
 
@@ -159,6 +180,17 @@ class AdminController extends Controller
         return back()->with('success', 'Course have been added');
 
     }
+
+    public function updatecourse(Request $request, $id){
+
+        $course = Course::find($id);
+        $course->course_name = $request->input('name');
+        $course->update();
+
+        return back()->with('course_update_success', 'Course details Have been updated');
+        
+    }
+
     public function delete_Course($id)
     {
         $data = Course::find($id);
@@ -373,15 +405,13 @@ class AdminController extends Controller
         // return dd($request);
         $request->validate([
             'topic_id' => 'required|max:255',
-            'material_video' => 'required|mimes:mp4',
-            'material_doc' => 'required|mimes:pdf,pptx'
+            'material' => 'required|mimes:pdf,pptx,mp4',
+            'material_type' => 'required|max:255'
         ]);
 
-        $material_doc_name = time() . '-' . $request->file('material_doc')->getClientOriginalName();
-        $material_video_name =  time() . '-' . $request->file('material_video')->getClientOriginalName();
+        $material = time() . '-' . $request->file('material')->getClientOriginalName();
 
-        $request->material_doc->move(public_path('uploads'), $material_doc_name);
-        $request->material_video->move(public_path('uploads'), $material_video_name);
+        $request->material->move(public_path('uploads'), $material);
 
 
 
@@ -389,8 +419,8 @@ class AdminController extends Controller
 
         Material::create([
             'topic_id' => $request->input('topic_id'),
-            'material_video' => $material_video_name,
-            'material_doc' => $material_doc_name,
+            'material' => $material,
+            'material_type' => $request->input('material_type'),
         ]);
 
         return back()->with('material_success', 'Materials have been added');
@@ -399,11 +429,9 @@ class AdminController extends Controller
     public function delete_material($id)
     {
         $data = Material::find($id);
-        $material_video = $data['material_video'];
-        $material_doc = $data['material_doc'];
+        $material = $data['material'];
 
-        File::delete(["uploads/$material_doc"]);
-        File::delete(["uploads/$material_video"]);
+        File::delete(["uploads/$material"]);
 
         $data->delete();
         return redirect()->back();

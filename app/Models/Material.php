@@ -10,7 +10,7 @@ class Material extends Model
     use HasFactory;
     public $fillable = [
         'topic_id',
-        'material_doc',
-        'material_video',
+        'material',
+        'material_type',
     ];
 }
