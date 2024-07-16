@@ -47,6 +47,23 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+	<style>
+        .whatsapp-float {
+            position: fixed;
+            bottom: 60px;
+            right: 20px;
+            z-index: 1000;
+            background-color: #fff;
+            border-radius: 50%;
+            padding: 10px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .whatsapp-icon {
+            width: 40px;
+            height: 40px;
+        }
+    </style>
 </head>
 
 <body>
@@ -280,13 +297,16 @@
 						<div class="footer_support_widget">
 							<h4>MOBILE</h4>
 							<div class="app_grid">
-								<a href="https://wa.me/917994308484"><button class="apple_btn btn-dark">
+								{{-- <a href="https://wa.me/917994308484"><button class="apple_btn btn-dark">
 										<span class="icon">
 											<span><img src="images/w.png"></span>
 										</span>
 										<span class="title">WhatsApp</span>
 										<span class="subtitle">Contact us</span>
-									</button></a>
+									</button></a> --}}
+									 <a href="https://wa.me/917994308484" class="whatsapp-float">
+                                    <img src="images/w.png" alt="WhatsApp" class="whatsapp-icon">
+                                </a>
 								<a href="tel:+91 8281336937"><button class="apple_btn btn-dark">
 										<span class="icon">
 											<span><img src="images/m.png"></span>
