@@ -153,7 +153,7 @@
 		                </ul>
 		            </li>
 		            <li class="last">
-		                <a href="page-contact.html"><span class="title">Contact</span></a>
+		                <a href="{{ route('contact') }}"><span class="title">Contact</span></a>
 		            </li>
 		        </ul>
 		        <ul class="header_user_notif pull-right dn-smd">
@@ -426,7 +426,7 @@
 	                    <li><a href="page-blog-single.html">Single Post</a></li>
 					</ul>
 				</li>
-				<li><a href="page-contact.html">Contact</a></li>
+				<li><a href="{{ route('contact') }}">Contact</a></li>
 				<li><a href="page-login.html"><span class="flaticon-user"></span> Login</a></li>
 				<li><a href="page-register.html"><span class="flaticon-edit"></span> Register</a></li>
 			</ul>

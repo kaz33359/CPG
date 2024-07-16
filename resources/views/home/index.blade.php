@@ -10,7 +10,7 @@
 							<h2 class="fz50">Find the Best Courses</h2>
 							<p class="color-white">Technology is brining a massive wave of evolution on learning things
 								on different ways.</p>
-							<a class="btn home_btn" href="#">Ready to get Started?</a>
+							<a class="btn home_btn" href="">Ready to get Started?</a>
 						</div>
 					</div>
 				</div>
@@ -46,7 +46,7 @@
 								skills, reduce risks, make workplaces healthier and safer for everyone and improve
 								long-term
 								business performance.</p>
-							<a href="about.html" class="btn about_btn_home3">View More</a>
+							<a href="{{ route('about') }}" class="btn about_btn_home3">View More</a>
 							<ul class="partners_thumb_list">
 
 							</ul>
@@ -131,7 +131,7 @@
 						<div class="img_hvr_box home3" style="background-image: url({{ URL('images/courses/1.jpeg') }});">
 							<div class="overlay">
 								<div class="details">
-									<a href="c1.html">
+									<a href="{{ route('CSP-ASP-training') }}">
 										<h6 style="color:white;"><b>CSP / ASP Training </b></h6>
 
 								</div>
@@ -139,7 +139,7 @@
 						</div>
 					</div>
 
-					<div class="col-sm-12 col-lg-4" onclick="location.href='c3.html';">
+					<div class="col-sm-12 col-lg-4" onclick="location.href='{{ route('OTHM') }}';">
 						<div class="img_hvr_box home3" style="background-image: url({{ URL('images/courses/6.jpg') }});">
 							<div class="overlay">
 								<div class="details">
@@ -150,7 +150,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-12 col-lg-4" onclick="location.href='c4.html';">
+					<div class="col-sm-12 col-lg-4" onclick="location.href='{{ route('STED') }}';">
 						<div class="img_hvr_box home3" style="background-image: url({{ URL('images/courses/7.jpg') }});">
 							<div class="overlay">
 								<div class="details">
@@ -164,7 +164,7 @@
 
 					<div class="col-lg-6 offset-lg-3">
 						<div class="courses_all_btn home3 text-center">
-							<a class="btn btn-transparent" href="c1.html">View All Courses</a>
+							<a class="btn btn-transparent" href="">View All Courses</a>
 						</div>
 					</div>
 				</div>
@@ -190,7 +190,7 @@
 				<div class="row">
 					<div class="col-sm-12 col-lg-4 col-xl-4">
 						<div class="blog_post_home2 home3">
-							<div class="bph2_header" onclick="location.href='c8.html';">
+							<div class="bph2_header" onclick="location.href='{{ route('consultancy-services') }}';">
 								<img class="img-fluid" src="{{ URL('images/blog/cpg.jpg') }}" alt="5.jpg">
 
 							</div>
@@ -200,7 +200,7 @@
 
 									</ul>
 								</div>
-								<a href="c8.html">
+								<a href="{{ route('consultancy-services') }}">
 									<h4>C.P.G Consultancy Services</h4>
 								</a>
 							</div>
@@ -208,7 +208,7 @@
 					</div>
 					<div class="col-sm-12 col-lg-4 col-xl-4">
 						<div class="blog_post_home2 home3">
-							<div class="bph2_header" onclick="location.href='b6.html';">
+							<div class="bph2_header" onclick="location.href='{{ route('safety-manpower-solution') }}';">
 								<img class="img-fluid" src="{{ URL('images/blog/4.jpg') }}" alt="4.jpg">
 
 							</div>
@@ -218,7 +218,7 @@
 
 									</ul>
 								</div>
-								<a href="b6.html">
+								<a href="{{ route('safety-manpower-solution') }}">
 									<h4>Safety Manpower Solution</h4>
 								</a>
 							</div>
@@ -226,7 +226,7 @@
 					</div>
 					<div class="col-sm-12 col-lg-4 col-xl-4">
 						<div class="blog_post_home2 home3">
-							<div class="bph2_header" onclick="location.href='b1.html';">
+							<div class="bph2_header" onclick="location.href='{{ route('fire-protection-system') }}';">
 								<img class="img-fluid" src="{{ URL('images/blog/6.jpg') }}" alt="6.jpg">
 
 							</div>
@@ -236,7 +236,7 @@
 
 									</ul>
 								</div>
-								<a href="b1.html">
+								<a href="{{ route('fire-protection-system') }}">
 									<h4>Fire Protection System </h4>
 								</a>
 							</div>
@@ -264,7 +264,7 @@
 							<div class="bi_grid">
 								<h3>Join our Course</h3>
 								<p> <br class="dn-lg"> </p>
-								<a class="btn btn-white" href="contact.html">Join Us <span
+								<a class="btn btn-white" href="{{ route('contact') }}">Join Us <span
 										class="flaticon-right-arrow-1"></span></a>
 							</div>
 						</div>
@@ -274,7 +274,7 @@
 							<div class="bi_grid">
 								<h3>Business Solutions</h3>
 								<p> <br class="dn-lg"></p>
-								<a class="btn btn-white" href="contact.html">Join Us<span
+								<a class="btn btn-white" href="{{ route('contact') }}">Join Us<span
 										class="flaticon-right-arrow-1"></span></a>
 							</div>
 						</div>

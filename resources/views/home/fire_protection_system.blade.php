@@ -128,7 +128,7 @@
 									<div class="overlay">
 										<div class="tag">Related</div>
 										<div class="icon"><span class="flaticon-like"></span></div>
-										<a class="tc_preview_course" href="c8.html">View</a>
+										<a class="tc_preview_course" href="{{ route('consultancy-services') }}">View</a>
 									</div>
 								</div>
 								<div class="details">
@@ -148,7 +148,7 @@
 										<ul class="tc_meta float-left">
 											<!--<li class="list-inline-item"><a href="#"><i class="flaticon-profile"></i></a></li>-->
 											<li class="list-inline-item"><a href="#"><i class="flaticon-comment"></i></a></li>
-											<li class="list-inline-item"><a href="c8.html">Click here to Know More  </a></li>
+											<li class="list-inline-item"><a href="{{ route('consultancy-services') }}">Click here to Know More  </a></li>
 											<!--<li class="list-inline-item"><a href="#">25</a></li>-->
 										</ul>
 										<div class="tc_price float-right">>></div>
@@ -163,7 +163,7 @@
 									<div class="overlay">
 										<div class="tag">Related</div>
 										<div class="icon"><span class="flaticon-like"></span></div>
-										<a class="tc_preview_course" href="b6.html">View</a>
+										<a class="tc_preview_course" href="{{ route('safety-manpower-solution') }}">View</a>
 									</div>
 								</div>
 								<div class="details">
@@ -183,7 +183,7 @@
 										<ul class="tc_meta float-left">
 											<!--<li class="list-inline-item"><a href="#"><i class="flaticon-profile"></i></a></li>-->
 											<li class="list-inline-item"><a href="#"><i class="flaticon-comment"></i></a></li>
-											<li class="list-inline-item"><a href="b6.html">Click here to Know More  </a></li>
+											<li class="list-inline-item"><a href="{{ route('safety-manpower-solution') }}">Click here to Know More  </a></li>
 											<!--<li class="list-inline-item"><a href="#">25</a></li>-->
 										</ul>
 										<div class="tc_price float-right">>></div>
@@ -198,7 +198,7 @@
 									<div class="overlay">
 										<div class="tag">Top Course</div>
 										<div class="icon"><span class="flaticon-like"></span></div>
-										<a class="tc_preview_course" href="c4.html">Preview Course</a>
+										<a class="tc_preview_course" href="{{ route('STED') }}">Preview Course</a>
 									</div>
 								</div>
 								<div class="details">
@@ -218,7 +218,7 @@
 											<ul class="tc_meta float-left">
 											<!--<li class="list-inline-item"><a href="#"><i class="flaticon-profile"></i></a></li>-->
 											<li class="list-inline-item"><a href="#"><i class="flaticon-comment"></i></a></li>
-											<li class="list-inline-item"><a href="c4.html">Click here to Know More  </a></li>
+											<li class="list-inline-item"><a href="{{ route('STED') }}">Click here to Know More  </a></li>
 											<!--<li class="list-inline-item"><a href="#">25</a></li>-->
 										</ul>
 										<div class="tc_price float-right">>></div>
