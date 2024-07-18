@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Chapter;
 use App\Models\Student;
 use App\Models\Course;
+use App\Models\CourseEnquiry;
 use App\Models\Material;
 use App\Models\Module;
 use App\Models\Topic;
@@ -39,7 +40,7 @@ class AdminController extends Controller
         return view('admin.login');
     }
 
-    
+
     public function auth(Request $request)
     {
         $email = $request->post('email');
@@ -49,17 +50,17 @@ class AdminController extends Controller
         // echo '<pre>';
         // print_r($result);
 
-        $result = Admin::where(['email'=>$email])->first();
+        $result = Admin::where(['email' => $email])->first();
         if ($result) {
-            if(Hash::check($request->post('password'),$result->password)){
+            if (Hash::check($request->post('password'), $result->password)) {
                 $request->session()->put('ADMIN_LOGIN', true);
                 $request->session()->put('ADMIN_ID', $result->id);
                 return redirect('admin/dashboard');
-            }else{
+            } else {
                 $request->session()->flash('error', 'Please Enter Valid Password');
                 return redirect('admin');
             }
-        }else {
+        } else {
             $request->session()->flash('error', 'Please Enter Valid login Details');
             return redirect('admin');
         }
@@ -76,12 +77,12 @@ class AdminController extends Controller
         // $students = Student::all();
         $courses = DB::table('courses')->select('*')->where('status', [1])->get();
         // $courses = DB::select('select * from courses where status = ?', [1]);
-       
+
         // select students.*, courses.course_name from students inner join courses on students.course_id = courses.id
         $students_data = Student::join('courses', 'students.course_id', '=', 'courses.id')
             ->get(['students.*', 'courses.course_name']);
 
-        return view('admin.students',['students_data' => $students_data, 'courses' => $courses]);
+        return view('admin.students', ['students_data' => $students_data, 'courses' => $courses]);
     }
 
     public function viewStudents($id)
@@ -92,7 +93,7 @@ class AdminController extends Controller
             ->where('students.id', [$id])
             ->get(['students.*', 'courses.course_name']);
 
-        return view('admin.student-profile',['students_data' => $students_data, 'courses' => $courses ]);
+        return view('admin.student-profile', ['students_data' => $students_data, 'courses' => $courses]);
     }
 
     public function studentregistraiton(Request $request)
@@ -109,12 +110,12 @@ class AdminController extends Controller
         $email = $request->input('email');
         $mobile = $request->input('mobile');
         $course_id = $request->input('course_id');
-        $password = Hash::make($request->input('password')); 
-        $data = array('name' => $name, "email" => $email, "mobile" => $mobile, "course_id" =>$course_id, "password" => $password);
+        $password = Hash::make($request->input('password'));
+        $data = array('name' => $name, "email" => $email, "mobile" => $mobile, "course_id" => $course_id, "password" => $password);
         DB::table('students')->insert($data);
         return back()->with('success', 'Student have been added');
         // return response()->json($model);
-    
+
     }
 
     public function updatestudents(Request $request, $id)
@@ -131,14 +132,14 @@ class AdminController extends Controller
         $student->name = $request->input('name');
         $student->email = $request->input('email');
         $student->mobile = $request->input('mobile');
-        $student->password = Hash::make($request->input('password')); 
+        $student->password = Hash::make($request->input('password'));
         $student->course_id = $request->input('course_id');
         $student->update();
 
         return back()->with('student_update_success', 'Student details Have been updated');
     }
 
-    
+
 
 
     public function delete_student($id)
@@ -147,7 +148,7 @@ class AdminController extends Controller
         $data->delete();
         return redirect()->back();
     }
-    
+
     public function status_student($id)
     {
         $data = Student::find($id);
@@ -155,9 +156,9 @@ class AdminController extends Controller
         if ($data->status == 1) {
             $data->status = 0;
             $data->save();
-        }else{
-             $data->status = 1;
-             $data->save();
+        } else {
+            $data->status = 1;
+            $data->save();
         }
         return redirect()->back();
     }
@@ -170,6 +171,7 @@ class AdminController extends Controller
         return view('admin.courses', ['courses' => $courses]);
     }
 
+
     public function addCourse(Request $request)
     {
         $request->validate([
@@ -178,17 +180,16 @@ class AdminController extends Controller
 
         Course::create($request->all());
         return back()->with('success', 'Course have been added');
-
     }
 
-    public function updatecourse(Request $request, $id){
+    public function updatecourse(Request $request, $id)
+    {
 
         $course = Course::find($id);
         $course->course_name = $request->input('name');
         $course->update();
 
         return back()->with('course_update_success', 'Course details Have been updated');
-        
     }
 
     public function delete_Course($id)
@@ -220,22 +221,22 @@ class AdminController extends Controller
 
         // return $modules_view;
 
-        $chapters = Chapter::join('modules','chapters.module_id','=','modules.id')
-        ->where('chapters.course_id', [$id])
-        ->get(['chapters.*', 'modules.module_name']);
-        $chapters_view = DB::table('chapters')->select('*')->where('course_id', [$id])->where('status',[1])->get();
+        $chapters = Chapter::join('modules', 'chapters.module_id', '=', 'modules.id')
+            ->where('chapters.course_id', [$id])
+            ->get(['chapters.*', 'modules.module_name']);
+        $chapters_view = DB::table('chapters')->select('*')->where('course_id', [$id])->where('status', [1])->get();
 
         // return $modules_view;
 
         $topics = DB::table('topics')
-        ->join('modules','topics.module_id' ,'=','modules.id')
-        ->join('chapters', 'topics.chapter_id' ,'=', 'chapters.id')
-        ->get(['topics.*', 'chapters.chapter_name','modules.module_name']);
+            ->join('modules', 'topics.module_id', '=', 'modules.id')
+            ->join('chapters', 'topics.chapter_id', '=', 'chapters.id')
+            ->get(['topics.*', 'chapters.chapter_name', 'modules.module_name']);
         $topics_view = DB::table('topics')->select('*')->where('course_id', [$id])->where('status', [1])->get();
-        
+
         $materials = DB::table('materials')
-        ->join('topics', 'materials.topic_id' ,'=', 'topics.id')
-        ->get(['materials.*', 'topics.topic_name']);
+            ->join('topics', 'materials.topic_id', '=', 'topics.id')
+            ->get(['materials.*', 'topics.topic_name']);
         $materials_view = DB::table('materials')->select('*')->where('status', [1])->get();
 
 
@@ -244,20 +245,20 @@ class AdminController extends Controller
         return view('admin.course-view', [
             'courses' => $courses,
 
-            'modules'=> $modules,
-            'modules_view'=> $modules_view,
+            'modules' => $modules,
+            'modules_view' => $modules_view,
 
-            'chapters'=> $chapters,
-            'chapters_view'=> $chapters_view,
+            'chapters' => $chapters,
+            'chapters_view' => $chapters_view,
 
-            'topics'=> $topics,
-            'topics_view'=> $topics_view,
+            'topics' => $topics,
+            'topics_view' => $topics_view,
 
-            'materials'=> $materials,
-            'materials_view'=> $materials_view
+            'materials' => $materials,
+            'materials_view' => $materials_view
 
 
-            ]);
+        ]);
     }
 
     // ################################ Module ################################
@@ -274,7 +275,7 @@ class AdminController extends Controller
         Module::create($request->all());
         return back()->with('module_success', 'Module have been added');
     }
-    
+
     public function delete_module($id)
     {
         $data = Module::find($id);
@@ -296,11 +297,11 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    public function get_module($id){
+    public function get_module($id)
+    {
 
         $modules_select = DB::table('modules')->where('course_id', $id)->where('status', 1)->get();
         return dd($modules_select);
-
     }
 
 
@@ -318,7 +319,7 @@ class AdminController extends Controller
         Chapter::create($request->all());
         return back()->with('chapter_success', 'Chapter have been added');
     }
-    
+
     public function delete_chapter($id)
     {
         $data = Chapter::find($id);
@@ -346,7 +347,7 @@ class AdminController extends Controller
         $chapters_select = DB::table('chapters')->select('*')->where('course_id', [$id])->where('status', [1])->get();
         return dd($chapters_select);
     }
-    
+
     // ################################ Topic ################################
 
     public function addtopic(Request $request)
@@ -451,5 +452,33 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-   
+
+    public function courseEnquiries()
+    {
+        // Fetch all courses
+        $courses = Course::all();
+
+        // Create a map of course_id to course name
+        $courseMap = $courses->pluck('course_name', 'id');
+
+        // Fetch all course enquiries
+        $course_enquiries = CourseEnquiry::all();
+
+        // Attach course name to each enquiry
+        $course_enquiries->each(function ($enquiry) use ($courseMap) {
+            $enquiry->course_name = $courseMap[$enquiry->course_id] ?? 'Unknown Course';
+        });
+
+        // Pass data to the view
+        return view('admin.course-enquiries', [
+            'courses' => $courses,
+            'course_enquiries' => $course_enquiries
+        ]);
+    }
+    public function deleteCourseEnquiries($id)
+    {
+        $data = CourseEnquiry::find($id);
+        $data->delete();
+        return redirect()->back();
+    }
 }

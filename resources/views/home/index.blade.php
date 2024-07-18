@@ -10,7 +10,7 @@
 							<h2 class="fz50">Find the Best Courses</h2>
 							<p class="color-white">Technology is brining a massive wave of evolution on learning things
 								on different ways.</p>
-							<a class="btn home_btn" href="">Ready to get Started?</a>
+							<a class="btn home_btn" href="{{ route('contact') }}">Ready to get Started?</a>
 						</div>
 					</div>
 				</div>

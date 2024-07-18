@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>CPG | Students</title>
+    <title>CPG | Course Enquiries</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('admin-assets/assets/img/cpglogo.jpg') }}" />
 
     <link href="{{ asset('admin-assets/assets/css/loader.css') }}" rel="stylesheet" type="text/css" />
@@ -271,7 +271,7 @@
                         </a>
                     </li>
 
-                    <li class="menu single-menu active">
+                    <li class="menu single-menu">
                         <a href="{{ url('admin/students') }}" aria-expanded="true"
                             class="dropdown-toggle autodroprown">
                             <div class="">
@@ -285,8 +285,7 @@
                             </div>
                         </a>
                     </li>
-
-                    <li class="menu single-menu">
+                    <li class="menu single-menu active">
                         <a href="{{ url('admin/course_enquiries') }}" aria-expanded="true"
                             class="dropdown-toggle autodroprown">
                             <div class="">
@@ -314,151 +313,38 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
                             <li class="breadcrumb-item active" aria-current="page"><a
-                                    href="javascript:void(0);">Student</a></li>
+                                    href="javascript:void(0);">Course enquiries</a></li>
                         </ol>
                     </nav>
                 </div>
 
                 <div class="row layout-top-spacing">
-
-                    <div class="col-lg-12 layout-spacing">
-                        <div class="statbox widget box box-shadow">
-                            <div id="accordionBasic" class="widget-header">
-                                <div class="row">
-                                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                        <h4>Add Student</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="widget-content widget-content-area">
-                                <div id="toggleAccordion">
-                                    <div class="card">
-                                        <div class="card-header" id="headingThree1">
-                                            <section class="mb-0 mt-0">
-                                                <div role="menu" class="collapsed" data-toggle="collapse"
-                                                    data-target="#defaultAccordionThree" aria-expanded="false"
-                                                    aria-controls="defaultAccordionThree">
-                                                        Enter Student Details
-                                                        <div class="icons"><svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                            class="feather feather-chevron-down">
-                                                            <polyline points="6 9 12 15 18 9"></polyline>
-                                                        </svg>
-                                                    </div>
-                                                </div>
-                                            </section>
-                                        </div>
-                                        <div id="defaultAccordionThree" class="collapse" aria-labelledby="headingThree1"
-                                            data-parent="#toggleAccordion">
-                                            <div class="card-body">
-                                                @if(Session::has('success'))
-                                                <div class="alert alert-light-success border-0 mb-4" role="alert"> 
-                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-dismiss="alert"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                                                    </button>
-                                                    <strong>Success!</strong> {{Session::get('success')}}
-                                                </div> 
-                                                @endif   
-                                                <form id="" method="POST" action="{{ route('studentregistraiton') }}">
-                                                    @csrf
-                                                    <div class="form-row mb-4"> 
-                                                        <div class="form-group col-md-6">
-                                                            <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" required>
-                                                        </div>
-                                                        <div class="form-group col-md-6">
-                                                            <input type="number" class="form-control" id="mobile" name="mobile" aria-describedby="emailHelp1" placeholder="Mobile Number"  required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-row mb-4"> 
-                                                        <div class="form-group col-md-6">
-                                                            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp1" placeholder="Email address" required>
-                                                        </div>
-                                                        <div class="form-group col-md-6">
-                                                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-                                                        </div>
-                                                    </div>                                            
-                                                    <div class="form-group mb-4">
-                                                        <label for="inputState">Course</label>
-                                                        <select id="inputState" name="course_id" class="form-control"  required>
-                                                            @foreach ($courses as $course)
-                                                             <option value="{{ $course->id }}">{{ $course->course_name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>           
-                                                    @if ($errors->any())
-                                                        @foreach ($errors->all() as $err)
-                                                            <div class="alert alert-light-danger border-0 mb-4" role="alert"> 
-                                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-dismiss="alert"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                                                                </button>
-                                                                <strong>Error!</strong> {{ $err }}
-                                                            </div>
-                                                        @endforeach
-                                                    @endif
-                                                    <button type="submit" id="" class="btn btn-primary mt-3 message">Submit</button>
-                                                </form>
-                    
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                         <div class="widget-content widget-content-area br-6">
                             <table id="html5-extension" class="table style-3 table-hover non-hover" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>id</th>
-                                        <th>Name</th>
+                                        <th>Full Name</th>
                                         <th>Email</th>
                                         <th>Mobile</th>
                                         <th>Course</th>
-                                        <th>Profile</th>
-                                        <th>Account Status</th>
                                         <th class="dt-no-sorting">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>  
                                     
-                                    @foreach ($students_data as $student )
+                                    @foreach ($course_enquiries as $enquiries )
                                         <tr>
-                                        <td>{{ $student['id'] }}</td>
-                                        <td>{{ $student['name'] }}</td>
-                                        <td>{{ $student['email'] }}</td>
-                                        <td>{{ $student['mobile'] }}</td>
-                                        <td>{{ $student['course_name'] }}</td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <div class="usr-img-frame mr-2 rounded-circle">
-                                                    <img alt="avatar" class="img-fluid rounded-circle" src="{{ asset('admin-assets/assets/img/boy-2.png') }}">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        @if ($student['status'] == 1)
-                                        <td><button class="btn btn-success mb-2"><a href="{{ url('/status_student',$student->id) }}">Active</a></button></td>
-                                        @else
-                                        <td><button class="btn btn-danger mb-2"><a href="{{ url('/status_student',$student->id) }}">Deactive</a></button></td>
-                                        @endif
+                                        <td>{{ $enquiries->id }}</td>
+                                        <td>{{ $enquiries->name }}</td>
+                                        <td>{{ $enquiries->email }}</td>
+                                        <td>{{ $enquiries->mobile }}</td>
+                                        <td>{{ $enquiries->course_name }}</td>
                                         <td class="text-center">
                                             <ul class="table-controls">
-                                                <li><a href="{{ url('admin/student_profile',$student->id) }}" class="bs-tooltip"
-                                                        data-toggle="tooltip" data-placement="top" title=""
-                                                        data-original-title="Edit"><svg
-                                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            class="feather feather-edit-2 p-1 br-6 mb-1">
-                                                            <path
-                                                                d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z">
-                                                            </path>
-                                                        </svg></a></li>
                                                 <li>
-                                                    <a href="{{url('/delete_student',$student->id)}}" class="bs-tooltip"
+                                                    <a href="{{url('/delete_course_enquiries',$enquiries->id)}}" class="bs-tooltip"
                                                         data-toggle="tooltip" data-placement="top" title=""
                                                         data-original-title="Delete Course"><svg
                                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -564,40 +450,6 @@
         });
     </script>
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-
-
-
-   
-    <script>
-    // ================================================
-    // |            Student Registration              |
-    // ================================================
-   
-        // alert('test');
-        jQuery("#frmStudentRegistration").submit(function (e) {
-            e.preventDefault();
-            // alert('test');
-            jQuery('#btn').attr('disabled',true)
-            jQuery('#btn').attr('value',"PLease Wait..")
-            jQuery.ajax({
-                url: "{{ url('admin/studentregistraiton') }}",
-                data: jQuery("#frmStudentRegistration").serialize(),
-                type: "post",
-                success: function(result){
-                    Swal.fire(
-                        'success',
-                        'Student Added',
-                        'success'
-                    )
-                    jQuery('#frmStudentRegistration')['0'].reset();
-                    jQuery('#btn').attr('disabled',false)
-                    jQuery('#btn').attr('value',"Submit")
-                    setTimeout(location.reload.bind(location), 1000);
-
-                }
-            });
-        });
-    </script>
 
 </body>
 

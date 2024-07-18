@@ -88,6 +88,9 @@
                             <li class="list-inline-item"><a href="#" class="btn btn-md" data-toggle="modal"
                                     data-target="#exampleModalCenter"><i class="flaticon-user"></i> <span
                                         class="dn-md">Login</span></a></li>
+                            <li class="list-inline-item"><a href="#" class="btn btn-md" data-toggle="modal"
+                                    data-target="#registerForm"><i class="flaticon-online-learning-1"></i> <span
+                                        class="dn-md">Register</span></a></li>
 
                         </ul><!-- Button trigger modal -->
                     </div>
@@ -219,6 +222,76 @@
 										@endif --}}
                                     <button type="submit" id="btnLogin"
                                         class="btn btn-log btn-block btn-thm2">Login</button>
+                                    <hr>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sign_up_modal modal fade" id="registerForm" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel"
+                            aria-labelledby="home-tab">
+                            <div class="login_form">
+                                <form action="{{ route('course.register') }}" method="POST">
+                                    @csrf
+                                    <div class="heading">
+                                        <h3 class="text-center">Register now for details</h3>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="name" class="form-control"
+                                            id="exampleInputname" placeholder="Enter your fullname" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" name="email" class="form-control"
+                                            id="exampleInputEmail1" placeholder="Enter email address" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="mobile" class="form-control"
+                                            id="exampleInputPassword1" placeholder="Enter mobile number" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <select name="course_id" class="form-control" id="exampleSelectCourse"
+                                            required>
+                                            <option value="">Select a course</option>
+                                            @foreach ($courses as $course)
+                                                <option value="{{ $course->id }}">{{ $course->course_name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    @if (session('error'))
+                                        <div class="ui_kit_message_box">
+                                            <div class="alert alert-primary alert-dismissible fade show"
+                                                role="alert">
+                                                {{ session('error') }}
+                                                <button type="button" class="close" data-dismiss="alert"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    {{-- @if (session('logout'))
+										<div class="ui_kit_message_box">
+											<div class="alert alert-primary alert-dismissible fade show" role="alert">
+													{{ session('logout') }}
+												<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+										</div>
+										@endif --}}
+                                    <button type="submit" id="btnLogin"
+                                        class="btn btn-log btn-block btn-thm2">Register</button>
                                     <hr>
                                 </form>
                             </div>
@@ -428,6 +501,9 @@
     <script type="text/javascript" src="{{ asset('js/timepicker.js') }}"></script>
     <!-- Custom script for all pages -->
     <script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
+    @include('sweetalert::alert')
 </body>
 
 

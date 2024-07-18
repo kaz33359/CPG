@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AdminController;
-
+use App\Http\Controllers\CourseEnquiriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +37,9 @@ Route::get('/STED', [PagesController::class, 'STED'])->name('STED');
 
 Route::get('student', [StudentController::class, 'index']);
 Route::post('student/auth', [StudentController::class, 'auth'])->name('student.auth');
+
+
+Route::post('course/register', [CourseEnquiriesController::class, 'course_register'])->name('course.register');
 
 Route::group(['middleware' => 'student_auth'], function () {
 
@@ -99,6 +102,9 @@ Route::group(['middleware'=> 'admin_auth'],function(){
     Route::post('admin/addmaterial', [AdminController::class, 'addmaterial'])->name('addmaterial');
     Route::get("/delete_material/{id}", [AdminController::class, "delete_material"]);
     Route::get("/status_material/{id}", [AdminController::class, "status_material"]);
+
+    Route::get('admin/course_enquiries', [AdminController::class, 'courseEnquiries'])->name('courseEnquiries');
+    Route::get('/delete_course_enquiries/{id}', [AdminController::class, 'deleteCourseEnquiries']);
 
 
     // Route::get("/get_module/{id}", [AdminController::class, "get_module"]);

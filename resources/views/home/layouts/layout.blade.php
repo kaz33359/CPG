@@ -84,7 +84,7 @@
 							<span class="icon-bar"></span>
 						</button>
 					</div>
-					<a href="#" class="navbar_brand float-left dn-smd">
+					<a href="{{ route('home') }}" class="navbar_brand float-left dn-smd">
 						<img class="logo1 img-fluid" src="{{ asset('images/header-logo.png') }}" alt="header-logo.png">
 						<img class="logo2 img-fluid" src="{{ asset('images/header-logo2.png') }}" alt="header-logo2.png">
 					</a>
