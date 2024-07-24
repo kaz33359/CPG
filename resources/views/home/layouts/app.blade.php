@@ -43,6 +43,7 @@
     <!-- Responsive stylesheet -->
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
     <style>
+
         .whatsapp-float {
             position: fixed;
             bottom: 60px;
@@ -88,9 +89,12 @@
                             <li class="list-inline-item"><a href="#" class="btn btn-md" data-toggle="modal"
                                     data-target="#exampleModalCenter"><i class="flaticon-user"></i> <span
                                         class="dn-md">Login</span></a></li>
-                            <li class="list-inline-item"><a href="#" class="btn btn-md" data-toggle="modal"
+                            {{-- <li class="list-inline-item"><a href="#" class="btn btn-md" data-toggle="modal"
                                     data-target="#registerForm"><i class="flaticon-online-learning-1"></i> <span
-                                        class="dn-md">Register</span></a></li>
+                                        class="dn-md">Register</span></a></li> --}}
+                            <li class="list-inline-item"><a href="#registerForm" class="btn btn-md"><i
+                                        class="flaticon-online-learning-1"></i> <span class="dn-md">Register</span></a>
+                            </li>
 
                         </ul><!-- Button trigger modal -->
                     </div>
@@ -230,7 +234,7 @@
                 </div>
             </div>
         </div>
-        <div class="sign_up_modal modal fade" id="registerForm" tabindex="-1" role="dialog" aria-hidden="true">
+        {{-- <div class="sign_up_modal modal fade" id="registerForm" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -280,16 +284,6 @@
                                             </div>
                                         </div>
                                     @endif
-                                    {{-- @if (session('logout'))
-										<div class="ui_kit_message_box">
-											<div class="alert alert-primary alert-dismissible fade show" role="alert">
-													{{ session('logout') }}
-												<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-													<span aria-hidden="true">&times;</span>
-												</button>
-											</div>
-										</div>
-										@endif --}}
                                     <button type="submit" id="btnLogin"
                                         class="btn btn-log btn-block btn-thm2">Register</button>
                                     <hr>
@@ -299,7 +293,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
 
         <!-- Main Header Nav For Mobile -->
@@ -405,7 +399,7 @@
                         <div class="footer_apps_widget home3">
                             <h4>MOBILE</h4>
                             <div class="app_grid">
-                                <a href="https://wa.me/917994308484" class="whatsapp-float">
+                                <a href="https://wa.me/919074577936" class="whatsapp-float">
                                     <img src="images/w.png" alt="WhatsApp" class="whatsapp-icon">
                                 </a>
 
@@ -451,9 +445,9 @@
                     <div class="col-sm-12 col-md-4 col-lg-3 col-xl-4 pb15 pt15">
                         <div class="footer_social_widget mt15">
                             <ul>
-                                <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a>
+                                <li class="list-inline-item"><a href="https://www.facebook.com/careerpointglobal/" target="blank"><i class="fa fa-facebook"></i></a>
                                 </li>
-                                <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a>
+                                <li class="list-inline-item"><a href="https://www.linkedin.com/company/cpg-career-point-global/" target="blank"><i class="fa fa-linkedin"></i></a>
                                 </li>
                                 <li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a>
                                 </li>
@@ -504,6 +498,18 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
     @include('sweetalert::alert')
+    <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+
 </body>
 
 

@@ -45,7 +45,6 @@ class AdminController extends Controller
     {
         $email = $request->post('email');
         $password = $request->post('password');
-
         // $result = Admin::where(['email'=>$email, 'password'=>$password])->get();
         // echo '<pre>';
         // print_r($result);

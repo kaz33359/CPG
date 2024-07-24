@@ -304,7 +304,7 @@
 										<span class="title">WhatsApp</span>
 										<span class="subtitle">Contact us</span>
 									</button></a> --}}
-									 <a href="https://wa.me/917994308484" class="whatsapp-float">
+									 <a href="https://wa.me/919074577936" class="whatsapp-float">
                                     <img src="images/w.png" alt="WhatsApp" class="whatsapp-icon">
                                 </a>
 								<a href="tel:+91 8281336937"><button class="apple_btn btn-dark">
@@ -347,8 +347,8 @@
 					<div class="col-sm-12 col-md-4 col-lg-3 col-xl-4 pb15 pt15">
 						<div class="footer_social_widget mt15">
 							<ul>
-								<li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li class="list-inline-item"><a href="#"><i class="fa fa-whatsapp"></i></a></li>
+								<li class="list-inline-item"><a href="https://www.facebook.com/careerpointglobal/"><i class="fa fa-facebook"></i></a></li>
+								<li class="list-inline-item"><a href=""><i class="fa fa-whatsapp"></i></a></li>
 								<li class="list-inline-item"><a href="#"><i class="fa fa-google"></i></a></li>
 							</ul>
 						</div>

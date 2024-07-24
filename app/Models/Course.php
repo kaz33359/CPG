@@ -9,6 +9,8 @@ class Course extends Model
 {
     use HasFactory;
     public $fillable =[
-        'course_name'
+        'course_name',
+        'course_description',
+        'status',
     ];
 }

@@ -19,8 +19,8 @@ class CreateCourseEnquiriesTable extends Migration
             $table->string('email');
             $table->string('mobile');
             $table->unsignedBigInteger('course_id'); // Change to unsignedBigInteger
-            $table->timestamps();
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
