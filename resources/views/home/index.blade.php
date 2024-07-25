@@ -127,7 +127,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-12 col-lg-4" onclick="location.href='c1.html';">
+                <div class="col-sm-12 col-lg-4" onclick="location.href='{{ route('CSP-ASP-training') }}';">
                     <div class="img_hvr_box home3" style="background-image: url({{ URL('images/courses/1.jpeg') }});">
                         <div class="overlay">
                             <div class="details">
@@ -143,7 +143,7 @@
                     <div class="img_hvr_box home3" style="background-image: url({{ URL('images/courses/6.jpg') }});">
                         <div class="overlay">
                             <div class="details">
-                                <a href="c3.html">
+                                <a href="{{ route('OTHM') }}">
                                     <h6 style="color:white;"><b>OTHM Level 6 Diploma</b></h6>
 
                             </div>
@@ -154,7 +154,7 @@
                     <div class="img_hvr_box home3" style="background-image: url({{ URL('images/courses/7.jpg') }});">
                         <div class="overlay">
                             <div class="details">
-                                <a href="c4.html">
+                                <a href="{{ route('STED') }}'">
                                     <h6 style="color:white;"><b>STED Council Diploma</b></h6>
 
                             </div>

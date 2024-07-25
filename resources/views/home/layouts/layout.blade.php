@@ -127,6 +127,7 @@
 					<ul class="sign_up_btn pull-right dn-smd mt20">
 						<li class="list-inline-item list_s"><a href="#" class="btn flaticon-user" data-toggle="modal"
 								data-target="#exampleModalCenter"> <span class="dn-lg">Login</span></a></li>
+						<li class="list-inline-item"><a href="{{ url('/') }}#registerForm" class="btn flaticon-online-learning-1 scroll-to-form"> <span class="dn-lg">Quick Enquiry</span></a></li>
 					</ul>
 					
 					<!-- Button trigger modal -->
@@ -392,6 +393,28 @@
 	<script type="text/javascript" src="{{ asset('js/timepicker.js') }}"></script>
 	<!-- Custom script for all pages -->
 	<script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
+	<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const links = document.querySelectorAll('a[href^="#"]');
+
+        for (const link of links) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        }
+    });
+</script>
+
 </body>
 
 </html>

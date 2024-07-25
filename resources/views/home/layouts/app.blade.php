@@ -93,7 +93,7 @@
                                     data-target="#registerForm"><i class="flaticon-online-learning-1"></i> <span
                                         class="dn-md">Register</span></a></li> --}}
                             <li class="list-inline-item"><a href="#registerForm" class="btn btn-md"><i
-                                        class="flaticon-online-learning-1"></i> <span class="dn-md">Register</span></a>
+                                        class="flaticon-online-learning-1"></i> <span class="dn-md">Quick Enquiry</span></a>
                             </li>
 
                         </ul><!-- Button trigger modal -->
