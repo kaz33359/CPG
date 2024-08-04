@@ -164,7 +164,7 @@
 
                 <div class="col-lg-6 offset-lg-3">
                     <div class="courses_all_btn home3 text-center">
-                        <a class="btn btn-transparent" href="">View All Courses</a>
+                        <a class="btn btn-transparent" href="{{ route('all_courses') }}">View All Courses</a>
                     </div>
                 </div>
             </div>

@@ -33,6 +33,13 @@ Route::get('/fire-protection-system', [PagesController::class, 'fire_protection_
 Route::get('/OTHM', [PagesController::class, 'OTHM'])->name('OTHM');
 Route::get('/safety-manpower-solution', [PagesController::class, 'safety_manpower_solution'])->name('safety-manpower-solution');
 Route::get('/STED', [PagesController::class, 'STED'])->name('STED');
+Route::get('/courses/all', [PagesController::class, 'all_courses'])->name('all_courses');
+Route::get('/IOSH-managing-safely', [PagesController::class, 'IOSH_managing_safely'])->name('IOSH-managing-safely');
+Route::get('/IOSH-train-the-trainer', [PagesController::class, 'IOSH_train_the_trainer'])->name('IOSH-train-the-trainer');
+Route::get('/NVQ', [PagesController::class, 'NVQ'])->name('NVQ');
+Route::get('/ISO', [PagesController::class, 'ISO'])->name('ISO');
+Route::get('/STI-USA', [PagesController::class, 'STI_USA'])->name('STI-USA');
+Route::get('/CPD_UK', [PagesController::class, 'CPD_UK'])->name('CPD-UK');
 
 
 Route::get('student', [StudentController::class, 'index']);

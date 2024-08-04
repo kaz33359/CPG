@@ -60,8 +60,8 @@
         }
 
         .whatsapp-icon {
-            width: 40px;
-            height: 40px;
+            width: 65px;
+            height: 65px;
         }
     </style>
 </head>
@@ -104,6 +104,12 @@
 								<li><a href="{{ route('CSP-ASP-training') }}">CSP / ASP Training </a></li>
 								<li><a href="{{ route('OTHM') }}">OTHM Level 6 Diploma</a></li>
 								<li><a href="{{ route('STED') }}">STED Council Diploma</a></li>
+								<li><a href="{{ route('IOSH-managing-safely') }}">IOSH Managing Safely</a></li>
+                                <li><a href="{{ route('IOSH-train-the-trainer') }}">IOSH Train the Trainer</a></li>
+                                <li><a href="{{ route('NVQ') }}">NVQ Level 6 Diploma</a></li>
+                                <li><a href="{{ route('ISO') }}">ISO Lead Auditor Courses</a></li>
+                                <li><a href="{{ route('STI-USA') }}">Scaffolding Certification (STI - USA)</a></li>
+                                <li><a href="{{ route('CPD-UK') }}">Process Safety Certification (CPD UK)</a></li>
 							</ul>
 
 						</li>
@@ -306,11 +312,11 @@
 										<span class="subtitle">Contact us</span>
 									</button></a> --}}
 									 <a href="https://wa.me/919074577936" class="whatsapp-float">
-                                    <img src="images/w.png" alt="WhatsApp" class="whatsapp-icon">
+                                    <img src="{{ asset('images/w.png') }}" alt="WhatsApp" class="whatsapp-icon">
                                 </a>
 								<a href="tel:+91 8281336937"><button class="apple_btn btn-dark">
 										<span class="icon">
-											<span><img src="images/m.png"></span>
+											<span><img src="{{ asset('images/m.png') }}"></span>
 										</span>
 										<span class="title">Mobile</span>
 										<span class="subtitle">Contact us</span>

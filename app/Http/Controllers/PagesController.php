@@ -90,6 +90,55 @@ class PagesController extends Controller
             'title' => $title
         ]);
     }
+    public function all_courses()
+    {
+        $title = 'CPG | All Courses';
+        return view('home/courses', [
+            'title' => $title
+        ]);
+    }
+    public function IOSH_managing_safely()
+    {
+        $title = 'CPG | IOSH Managing Safely';
+        return view('home/IOSH_managing_safely', [
+            'title' => $title
+        ]);
+    }
+    public function IOSH_train_the_trainer()
+    {
+        $title = 'CPG | IOSH Train the Trainer';
+        return view('home/IOSH_train_the_trainer', [
+            'title' => $title
+        ]);
+    }
+    public function NVQ()
+    {
+        $title = 'CPG | NVQ Level 6 Diploma';
+        return view('home/NVQ', [
+            'title' => $title
+        ]);
+    }
+    public function ISO()
+    {
+        $title = 'CPG | ISO Lead Auditor Courses';
+        return view('home/ISO', [
+            'title' => $title
+        ]);
+    }
+    public function STI_USA()
+    {
+        $title = 'CPG | Scaffolding Certification (STI - USA)';
+        return view('home/STI_USA', [
+            'title' => $title
+        ]);
+    }
+    public function CPD_UK()
+    {
+        $title = 'CPG | Process Safety Certification (CPD UK)';
+        return view('home/CPD_UK', [
+            'title' => $title
+        ]);
+    }
 
 
 }

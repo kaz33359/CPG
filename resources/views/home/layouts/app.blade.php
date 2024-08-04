@@ -43,7 +43,6 @@
     <!-- Responsive stylesheet -->
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
     <style>
-
         .whatsapp-float {
             position: fixed;
             bottom: 60px;
@@ -56,8 +55,8 @@
         }
 
         .whatsapp-icon {
-            width: 40px;
-            height: 40px;
+            width: 65px;
+            height: 65px;
         }
     </style>
 
@@ -93,7 +92,8 @@
                                     data-target="#registerForm"><i class="flaticon-online-learning-1"></i> <span
                                         class="dn-md">Register</span></a></li> --}}
                             <li class="list-inline-item"><a href="#registerForm" class="btn btn-md"><i
-                                        class="flaticon-online-learning-1"></i> <span class="dn-md">Quick Enquiry</span></a>
+                                        class="flaticon-online-learning-1"></i> <span class="dn-md">Quick
+                                        Enquiry</span></a>
                             </li>
 
                         </ul><!-- Button trigger modal -->
@@ -157,6 +157,12 @@
                                 <li><a href="{{ route('CSP-ASP-training') }}">CSP / ASP Training </a></li>
                                 <li><a href="{{ route('OTHM') }}">OTHM Level 6 Diploma</a></li>
                                 <li><a href="{{ route('STED') }}">STED Council Diploma</a></li>
+                                <li><a href="{{ route('IOSH-managing-safely') }}">IOSH Managing Safely</a></li>
+                                <li><a href="{{ route('IOSH-train-the-trainer') }}">IOSH Train the Trainer</a></li>
+                                <li><a href="{{ route('NVQ') }}">NVQ Level 6 Diploma</a></li>
+                                <li><a href="{{ route('ISO') }}">ISO Lead Auditor Courses</a></li>
+                                <li><a href="{{ route('STI-USA') }}">Scaffolding Certification (STI - USA)</a></li>
+                                <li><a href="{{ route('CPD-UK') }}">Process Safety Certification (CPD UK)</a></li>
                             </ul>
 
                         </li>
@@ -400,12 +406,12 @@
                             <h4>MOBILE</h4>
                             <div class="app_grid">
                                 <a href="https://wa.me/919074577936" class="whatsapp-float">
-                                    <img src="images/w.png" alt="WhatsApp" class="whatsapp-icon">
+                                    <img src="{{ asset('images/w.png') }}" alt="WhatsApp" class="whatsapp-icon">
                                 </a>
 
                                 <a href="tel:+91 8281336937"><button class="apple_btn btn-dark">
                                         <span class="icon">
-                                            <span><img src="images/m.png"></span>
+                                            <span><img src="{{ asset('images/m.png') }}"></span>
                                         </span>
                                         <span class="title">Mobile</span>
                                         <span class="subtitle">Contact us</span>
@@ -445,9 +451,12 @@
                     <div class="col-sm-12 col-md-4 col-lg-3 col-xl-4 pb15 pt15">
                         <div class="footer_social_widget mt15">
                             <ul>
-                                <li class="list-inline-item"><a href="https://www.facebook.com/careerpointglobal/" target="blank"><i class="fa fa-facebook"></i></a>
+                                <li class="list-inline-item"><a href="https://www.facebook.com/careerpointglobal/"
+                                        target="blank"><i class="fa fa-facebook"></i></a>
                                 </li>
-                                <li class="list-inline-item"><a href="https://www.linkedin.com/company/cpg-career-point-global/" target="blank"><i class="fa fa-linkedin"></i></a>
+                                <li class="list-inline-item"><a
+                                        href="https://www.linkedin.com/company/cpg-career-point-global/"
+                                        target="blank"><i class="fa fa-linkedin"></i></a>
                                 </li>
                                 <li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a>
                                 </li>
@@ -499,16 +508,16 @@
     <script src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
     @include('sweetalert::alert')
     <script>
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
 
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
-    });
-</script>
+    </script>
 
 </body>
 
