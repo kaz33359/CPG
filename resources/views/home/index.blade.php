@@ -58,8 +58,7 @@
                                 <span class="icon"><span class="flaticon-account"></span></span>
                                 <div class="details">
                                     <h4>Professional Trainers</h4>
-                                    <p>One of the most important hard skills a trainer should master is internet
-                                        research.
+                                    <p> Learn from industry experts with years of hands-on experience and a passion for teaching.
                                     </p>
                                 </div>
                             </div>
@@ -69,8 +68,7 @@
                                 <span class="icon"><span class="flaticon-online"></span></span>
                                 <div class="details">
                                     <h4>Commitment</h4>
-                                    <p>The ability to design well-structured courses and build fit-for-purpose
-                                        content.</p>
+                                    <p>Dedicated to delivering top-quality safety training with a focus on real-world application.</p>
                                 </div>
                             </div>
                         </div>
@@ -79,9 +77,7 @@
                                 <span class="icon"><span class="flaticon-student-1"></span></span>
                                 <div class="details">
                                     <h4>Innovation</h4>
-                                    <p>One of the most essential tools for training and development is an eLearning
-                                        content
-                                        authoring tool.</p>
+                                    <p>Continuously evolving our courses to incorporate the latest safety standards and technologies.</p>
                                 </div>
                             </div>
                         </div>
@@ -90,8 +86,7 @@
                                 <span class="icon"><span class="flaticon-employee"></span></span>
                                 <div class="details">
                                     <h4>International Certifications</h4>
-                                    <p>Successful completion of these courses enables you to move on International
-                                        level.
+                                    <p>Gain globally recognized certifications to enhance your career in safety and health.
                                     </p>
                                 </div>
                             </div>
@@ -249,69 +244,74 @@
     <!-- about3 home3 -->
     <section class="home3_about2 pb10 pt30">
         <div class="container">
-<div class="row mt60">
-    <!-- Register Form Section -->
-    <div id="registerForm" class="col-sm-6 col-lg-6 col-xl-6">
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <div class="login_form">
-                    <form action="{{ route('course.register') }}" method="POST">
-                        @csrf
-                        <div class="heading">
-                            <h3 class="text-center">Quick Enquiry</h3>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="name" class="form-control" id="exampleInputname"
-                                placeholder="Enter your fullname" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" name="email" class="form-control" id="exampleInputEmail1"
-                                placeholder="Enter email address" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="mobile" class="form-control" id="exampleInputPassword1"
-                                placeholder="Enter mobile number" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleSelectCourse">Select a course</label>
-                            <div id="exampleSelectCourse" class="row">
-                                @foreach ($courses as $course)
-                                    <div class="col-lg-3 col-md-4 col-sm-6 mb-2 mr-4">
-                                        <div class="form-check d-flex align-items-center">
-                                            <input class="form-check-input" type="checkbox" name="course_id[]"
-                                                value="{{ $course->id }}" id="course{{ $course->id }}">
-                                            <label class="form-check-label ml-2" for="course{{ $course->id }}">
-                                                {{ $course->course_name }}
-                                            </label>
-                                        </div>
+            <div class="row mt60">
+                <!-- Register Form Section -->
+                <div id="registerForm" class="col-sm-6 col-lg-6 col-xl-6">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel"
+                            aria-labelledby="home-tab">
+                            <div class="login_form">
+                                <form action="{{ route('course.register') }}" method="POST">
+                                    @csrf
+                                    <div class="heading">
+                                        <h3 class="text-center">Quick Enquiry</h3>
                                     </div>
-                                @endforeach
+                                    <div class="form-group">
+                                        <input type="text" name="name" class="form-control" id="exampleInputname"
+                                            placeholder="Enter your fullname" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" name="email" class="form-control"
+                                            id="exampleInputEmail1" placeholder="Enter email address" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="mobile" class="form-control"
+                                            id="exampleInputPassword1" placeholder="Enter mobile number" required>
+                                    </div>
+                                    @if (count($courses) > 0)
+                                        <div class="form-group">
+                                            <label for="exampleSelectCourse">Select a course</label>
+                                            <div id="exampleSelectCourse" class="row">
+                                                @foreach ($courses as $course)
+                                                    <div class="col-lg-3 col-md-4 col-sm-6 mb-2 mr-4">
+                                                        <div class="form-check d-flex align-items-center">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                name="course_id[]" value="{{ $course->id }}"
+                                                                id="course{{ $course->id }}">
+                                                            <label class="form-check-label ml-2"
+                                                                for="course{{ $course->id }}">
+                                                                {{ $course->course_name }}
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @endif
+                                    @if (session('error'))
+                                        <div class="ui_kit_message_box">
+                                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                                {{ session('error') }}
+                                                <button type="button" class="close" data-dismiss="alert"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    <button type="submit" id="btnLogin"
+                                        class="btn btn-log btn-block btn-thm2">Register</button>
+                                    <hr>
+                                </form>
                             </div>
                         </div>
-                        @if (session('error'))
-                            <div class="ui_kit_message_box">
-                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                    {{ session('error') }}
-                                    <button type="button" class="close" data-dismiss="alert"
-                                        aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            </div>
-                        @endif
-                        <button type="submit" id="btnLogin"
-                            class="btn btn-log btn-block btn-thm2">Register</button>
-                        <hr>
-                    </form>
+                    </div>
+                </div>
+                <!-- Image Section -->
+                <div class="col-sm-6 col-lg-6 col-xl-6 d-flex justify-content-center align-items-center">
+                    <img src="{{ asset('images/home/form_banner.jpg') }}" alt="Image Description" class="img-fluid">
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- Image Section -->
-    <div class="col-sm-6 col-lg-6 col-xl-6 d-flex justify-content-center align-items-center">
-        <img src="{{ asset('images/home/form_banner.jpg') }}" alt="Image Description" class="img-fluid">
-    </div>
-</div>
 
 
             <div class="row mt60">

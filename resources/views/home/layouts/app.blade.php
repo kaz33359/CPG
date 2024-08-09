@@ -12,7 +12,7 @@
     <meta name="description"
         content="CAREER POINT GLOBAL | Find the Best Courses. Technology is bringing a massive wave of evolution on learning things on different ways. Ready to get Started? ">
     <meta name="keywords"
-        content="safety,Career,Safetyfield,FIREMEN,fireforce,career at safety,Safety engineer,Safety officer,Career Point Global,CPG,Safety Feild,STED,IOSH,OTHM,level 6 diploma ">
+        content="health and safety, environment health and safety, occupational health and safety, safety certifications, workplace safety, safety training, health and safety courses, safety training courses, nebosh courses, nebosh certificate, nebosh igc, osha training, fire and safety course, hse training, iosh course, iosh certificate, fire safety training, fire & safety, fire and safety, safety training classes, nebosh online course, occupational safety and health administration, fire safety, first aid training, iosh managing safely, scaffolding training, nebosh international diploma, cpd courses, certification courses, project manager, construction manager course, health and safety officer, safety training, online certification courses, online nebosh course, safety engineering course, online training, iso certifications, nvq level 6 health and safety, fire safety engineering, quality management courses, nebosh igc certificate, safety inspector, oil and gas course, courses for safety officer, diploma in nebosh">
 
     <meta name="author" content="CPG | CAREER POINT GLOBAL ">
 
@@ -77,10 +77,10 @@
                 <div class="row">
                     <div class="col-lg-5 col-xl-5">
                         <ul class="home3_header_top_contact pull-left">
-                            <li class="list-inline-item"><a href="tel:+918281336937"><i class="fa fa-phone"></i>&nbsp;
-                                    +91 8281336937</a></li>
-                            <li class="list-inline-item"><a href="tel:+919567679966"><i class="fa fa-phone"></i>&nbsp;
-                                    +91 9567679966</a></li>
+                            <li class="list-inline-item"><a href="tel:+917994308484"><i class="fa fa-phone"></i>&nbsp;
+                                    +91 7994308484</a></li>
+                            <li class="list-inline-item"><a href="tel:+919074577936"><i class="fa fa-phone"></i>&nbsp;
+                                    +91 9074577936</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-7 col-xl-7">
@@ -152,7 +152,7 @@
                         </li>
                         <li class="list_three">
 
-                            <a href="#"><span class="title">Courses</span></a>
+                            <a href="{{ route('all_courses') }}"><span class="title">Courses</span></a>
                             <ul>
                                 <li><a href="{{ route('CSP-ASP-training') }}">CSP / ASP Training </a></li>
                                 <li><a href="{{ route('OTHM') }}">OTHM Level 6 Diploma</a></li>
@@ -384,8 +384,8 @@
                     <div class="col-sm-6 col-md-4 col-md-3 col-lg-3">
                         <div class="footer_company_widget home3">
                             <h4>CONTACT</h4>
-                            <p>+91 9567679966</p>
-                            <p>+91 8281336937</p>
+                            <p>+91 9074577936</p>
+                            <p>+91 7994308484</p>
                             <p>careerpointglobal.hse@gmail.com</p>
                         </div>
                     </div>
@@ -409,7 +409,7 @@
                                     <img src="{{ asset('images/w.png') }}" alt="WhatsApp" class="whatsapp-icon">
                                 </a>
 
-                                <a href="tel:+91 8281336937"><button class="apple_btn btn-dark">
+                                <a href="tel:+91 9074577936"><button class="apple_btn btn-dark">
                                         <span class="icon">
                                             <span><img src="{{ asset('images/m.png') }}"></span>
                                         </span>

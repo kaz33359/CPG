@@ -24,18 +24,18 @@
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="about_content">
-							<h3>About us:</h3>
+							<h2>About us:</h2>
 							<p class="color-black22 mt20">We at Career Point Global, are dedicated to deliver
 								world-class
 								Occupational Health & Safety,Environmental Management Training and Consultancy solution.
 								We are
 								a trusted leader in health, safety and environmental management. </p>
-							<p class="mt15">The expertise in HSE developed over the years allows us to work with
+							<p class="color-black22 mt15">The expertise in HSE developed over the years allows us to work with
 								organizations,
 								developing and delivering innovative training solutions and consultancy services that
 								help
 								improve our customers' HSE performance. </p>
-							<p class="mt20">Our aim is to help our customers achieve the very highest Health and Safety
+							<p class="color-black22 mt20">Our aim is to help our customers achieve the very highest Health and Safety
 								standards required by law to protect their staff and Environment. </p>
 						</div>
 					</div>
@@ -47,20 +47,20 @@
 				</div>
 
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-lg-6 mt-3">
 						<div class="about_whoweare">
-							<h4>Our mission </h4>
-							<p class="mt25">We keep people safe and healthy as possible in their work through education
+							<h2>Our mission </h2>
+							<p class="color-black22 mt25">We keep people safe and healthy as possible in their work through education
 								and
 								practical guidance
 							</p>
-							<p class="mt25"></p>
+							<p class="color-black22 mt25"></p>
 						</div>
 					</div>
-					<div class="col-lg-6">
+					<div class="col-lg-6 mt-3">
 						<div class="about_whoweare">
-							<h4>Our vision </h4>
-							<p class="mt25">We are dedicated in making sure no-one is injured or made ill through their
+							<h2>Our vision </h2>
+							<p class="color-black22 mt25">We are dedicated in making sure no-one is injured or made ill through their
 								work.
 							</p>
 							<!--<p class="mt25">We'll help you to develop knowledge and expertise, in whatever ways best suit your organisation and employees. Our educational support is comprehensive and flexible and covers all aspects of health, safety and environmental management.</p>-->

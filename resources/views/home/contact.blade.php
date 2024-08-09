@@ -36,8 +36,8 @@
 						<div class="contact_localtion text-center">
 							<div class="icon"><span class="flaticon-phone-call"></span></div>
 							<h4>Mobile</h4>
-							<p><a href="tel:+91 9567679966">+91 9567679966</a> </p>
-							<p><a href="tel:+91 8281336937">+91 8281336937</a></p>
+							<p><a href="tel:+91 9074577936">+91 9074577936</a> </p>
+							<p><a href="tel:+91 7994308484">+91 7994308484</a></p>
 						</div>
 					</div>
 					<div class="col-sm-6 col-lg-4">
